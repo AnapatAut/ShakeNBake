@@ -1,0 +1,200 @@
+1;Kosher salt
+2;Fine salt
+3;Black peppercorns
+4;Extra virgin olive oil
+5;Vegetable oil
+6;Apple cider vinegar
+7;Red wine vinegar
+8;Balsamic or sherry vinegar
+9;Rice vinegar (unseasoned)
+10;All purpose flour
+11;Whole wheat flour
+12;Pastry flour
+13;Baking soda
+14;Baking powder
+15;Cream of tartar
+16;Cocoa powder
+17;Chocolate chips
+18;Chocolate bars
+19;Evaporated milk
+20;Pure vanilla extract
+21;Granulated sugar
+22;Confectioners' sugar
+23;Brown sugar
+24;Maple syrup
+25;Honey
+26;Agave syrup
+27;Long-grain white rice
+28;Brown rice
+29;Bulgur
+30;Quinoa
+31;Couscous
+32;Farro
+33;Egg noodles
+34;Rice noodles
+35;Wide rice noodles
+36;Vermicelli noodles
+37;Polenta
+38;Panko breadcrumbs
+39;Crackers
+40;Tortillas
+41;Cookies 
+42;Pretzels
+43;Marshmallows
+44;Popcorn kernels
+45;Raisins
+46;Dried Apricots
+47;Dried cherries
+48;Peanut butter
+49;Applesauce
+50;Breakfast cereal
+51;Rolled oats
+52;Chicken broth
+53;Black beans
+54;Chickpeas
+55;Baked beans
+56;Canned peas
+57;Canned corn
+58;Olives
+59;Capers
+60;Pickled jalapenos
+61;Salsa
+62;Tomato paste
+63;Roasted red peppers
+64;Canned tuna
+65;Canned anchovies
+66;Bay leaves
+67;Cajun seasoning
+68;Cayenne pepper
+69;Chile flake
+70;Curry powder
+71;Fennel or dill seed
+72;Granulated garlic
+73;Ground cinnamon
+74;Ground cloves
+75;Ground cumin
+76;Ground ginger
+77;Oregano
+78;Paprika
+79;Rosemary
+80;Sesame seeds
+81;Jelly Beans
+82;Whole nutmeg
+83;Cow's milk
+84;Plain yogurt
+85;Unsalted butter
+86;American cheese
+87;Cheddar cheese
+88;Swiss cheese
+89;Mozzarella cheese
+90;Goat cheese
+91;Parmesan cheese
+92;Eggs
+93;Apples
+94;Avocados
+95;Bananas
+96;Bell peppers
+97;Broccoli
+98;Cauliflower
+99;Carrots
+100;Celery
+101;Lemons
+102;Limes
+103;Chard
+104;Spinach
+105;Kale
+106;Romaine lettuce
+107;Cilantro
+108;Lemongrass
+109;Kaffir lime leaves
+110;Galangal
+111;Flat-leaf parsley
+112;Thyme
+113;Scallions
+114;Garlic
+115;Ginger
+116;Potatoes
+117;Sweet potatoes
+118;Onions
+119;Tomatoes
+120;Cherry Tomatoes
+121;Red Onions
+122;Eggplant
+123;Snap Peas
+124;Pumpkin
+125;Bitter gourd
+126;Garlic buds
+127;Cilantro root
+128;Brussel sprouts
+129;Bean sprouts
+130;Red Onion
+131;Pickled garlic
+132;Shrimp paste
+133;Hard yellow tofu
+134;Silken tofu
+135;Firm tofu
+136;Green cabbage
+137;Wombok cabbage
+138;Red cabbage
+139;Hay mushrooms
+140;Cucumber
+141;Chips
+142;Wood ear mushrooms
+143;Shitake mushrooms
+144;Enoki mushrooms
+145;King oyster mushrooms
+146;Green curry paste
+147;Red curry paste
+148;Orange curry paste
+149;Jungle curry paste
+150;Snake Beans
+151;Baby corn
+152;Jam
+153;Ketchup
+154;Mayonnaise
+155;Mustard
+156;Pickles
+157;Hot sauce
+158;Worcestershire sauce
+159;Light soy sauce
+160;Dark soy sauce
+161;Oyster sauce
+162;Fish sauce
+163;Sesame oil
+164;MnM
+165;White pepper
+166;Black pepper
+167;Whole white pepper corns
+168;Whole black pepper corns
+169;Chinese cooking wine
+170;Corn starch
+171;Tamarind concentrate
+172;Soy bean paste
+173;Lime
+174;Red thai chillies
+175;Ground beef
+176;Ground pork
+177;Pork bones
+178;Pork short ribs
+179;Ground chicken
+180;Chicken wings
+181;Chicken Breasts
+182;Chicken carcass
+183;Bacon
+184;Sandwich bread
+185;Kaiser roll
+186;Sourdough bread
+187;Mango
+188;Guava
+189;Grapes
+190;Strawberries
+191;Watermelon
+192;Kiwis
+193;Oranges
+194;Pineapple
+195;Almonds
+196;Walnuts
+197;Pecans
+198;Puff pastry
+199;Vanilla ice cream
+200;Chocolate ice cream
