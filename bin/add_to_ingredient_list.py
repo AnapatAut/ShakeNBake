@@ -1,5 +1,15 @@
+# add_to_ingredient_list
+#
+# Connects to the recipe_database and creates a pre-set list of ingredients
+# for the database using the data/ingredients_list.txt file as a base
+#
 # Created by Inkaphol S., 26 Sep 2023
+#
+#
+# Modified to interface with the database through db_manager
+#
 # Modified by Anapat B., 28 Sep 2023
+
 import os.path
 import db_manager as db
 
