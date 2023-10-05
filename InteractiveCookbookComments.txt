@@ -1,0 +1,19 @@
+﻿Interactive Cookbook Comments
+
+
+2023-09-14: Good that you have fleshed out all use case narratives but I think you’re missing some extension scenarios.
+2023-09-21: SQL script needs header comment with explanation and author. 
+
+No functional design/flow map?
+
+I recommend that you create subdirectories for design, code, data base, etc.
+2023-09-28: Architecture diagram is a bit confusing because I’m not sure what the circles are supposed to be. I would consider revising because everything is going through the App Executive component. I would expect (for instance) for Search to go directly to the database. Also, no module table.
+2023-10-04: No coding standards uploaded.
+
+Thank you for adding header comments to your code.
+
+You should not call your source code directory “bin”. This implies that it’s compiled, binary code (which shouldn’t be in the repository anyway). 
+
+What is the purpose of the files in the .idea directory? 
+
+
