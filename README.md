@@ -1,4 +1,5 @@
 # ShakeNBake
+Team A edited here
 Team B edited here
 SYS-201(SEN-201) Interactive Cookbook Project
 Members: Aut, Ink, Mai, Shine
