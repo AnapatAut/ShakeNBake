@@ -1,5 +1,5 @@
 # ShakeNBake
-Team A edited here
+Team B edited here
 SYS-201(SEN-201) Interactive Cookbook Project
 Members: Aut, Ink, Mai, Shine
 Frontend: HTML, CSS, and JavaScript
@@ -13,4 +13,3 @@ Google sheet link to Architecture design: https://docs.google.com/spreadsheets/d
 
 Google docs link to Coding Standards: https://docs.google.com/document/d/1PvHD4uXHiJiYYQw0fu1YwvUAQgxJuNUZeAUedj6WC8I/edit?usp=sharing
 
-Team B edited here
