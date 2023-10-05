@@ -14,3 +14,5 @@ Google sheet link to Architecture design: https://docs.google.com/spreadsheets/d
 
 Google docs link to Coding Standards: https://docs.google.com/document/d/1PvHD4uXHiJiYYQw0fu1YwvUAQgxJuNUZeAUedj6WC8I/edit?usp=sharing
 
+The fitness grand pacer test is a multi staged arobic test, after the sound of the buzzer you will be required to run at different speeds eaech stage harder than the last. ready, start after the sound of the alarm.
+
