@@ -6,7 +6,8 @@
 # Created by Inkaphol S., 26 Sep 2023
 #
 #
-# Modified to interface with the database through db_manager
+# Modified to interface with the data
+# base through db_manager
 #
 # Modified by Anapat B., 28 Sep 2023
 
