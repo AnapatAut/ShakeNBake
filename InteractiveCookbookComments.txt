@@ -16,4 +16,11 @@ You should not call your source code directory “bin”. This implies that it�
 
 What is the purpose of the files in the .idea directory? 
 
+2023-10-12: Lab report is pretty skimpy, but I guess I am satisfied.
+
+Good that you reorganized your files.
+
+Coding standards are okay though omit some issues like line length, file organization
+
+Great that you are making progress with code! And your header comments have the authors!
 
