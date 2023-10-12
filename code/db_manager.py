@@ -3,6 +3,10 @@
 # Database manager used to as a center to interface with the database
 #
 # Created by Anapat B., 27 Sep 2023
+#
+# Modified to allow query all elements from a database table
+#
+# Modified by Anapat B., 12 Oct 2023
 
 import os
 import sqlite3
@@ -88,6 +92,33 @@ def db_query(conn, table, header, element):
         for element in head:
             print(element, end="")
         print()
+
+        return rec
+    except Error as e:
+        print(e)
+
+
+# Query all elements from a table
+# "conn" is the connection to the database
+# "table" is the name of the table to query the data from
+def db_searchbar_query(conn, table):
+    """
+    Query data from database
+    :param conn:
+    :param table:
+    :return:
+    """
+
+    try:
+        cur = conn.cursor()
+        sql_query = "SELECT * FROM " + table
+        cur.execute(sql_query)
+        rec = cur.fetchall()
+
+        if not rec:
+            return None
+
+        print(rec)
 
         return rec
     except Error as e:
