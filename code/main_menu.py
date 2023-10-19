@@ -61,10 +61,13 @@ class Ui_MainWindow(QMainWindow):
     def get_recipe_list(self):
         conn = db.create_connection()
         query = db.db_searchbar_query(conn, "main")
-        self.full_recipe_list = []
-        for recipes in query:
-            self.full_recipe_list.append(recipes[1])
-        print(self.full_recipe_list)
+        try:
+            self.full_recipe_list = []
+            for recipes in query:
+                self.full_recipe_list.append(recipes[1])
+            print(self.full_recipe_list)
+        except:
+            print("Error")
 
     def update_recipe_list(self):
 
