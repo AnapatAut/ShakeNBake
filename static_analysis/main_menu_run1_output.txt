@@ -1,0 +1,23 @@
+************* Module main_menu
+main_menu.py:10:0: E0611: No name 'QRect' in module 'PyQt5.QtCore' (no-name-in-module)
+main_menu.py:10:0: E0611: No name 'QCoreApplication' in module 'PyQt5.QtCore' (no-name-in-module)
+main_menu.py:11:0: E0611: No name 'QMainWindow' in module 'PyQt5.QtWidgets' (no-name-in-module)
+main_menu.py:11:0: E0611: No name 'QWidget' in module 'PyQt5.QtWidgets' (no-name-in-module)
+main_menu.py:11:0: E0611: No name 'QListWidget' in module 'PyQt5.QtWidgets' (no-name-in-module)
+main_menu.py:11:0: E0611: No name 'QPushButton' in module 'PyQt5.QtWidgets' (no-name-in-module)
+main_menu.py:11:0: E0611: No name 'QLineEdit' in module 'PyQt5.QtWidgets' (no-name-in-module)
+main_menu.py:11:0: E0611: No name 'QApplication' in module 'PyQt5.QtWidgets' (no-name-in-module)
+main_menu.py:16:0: C0115: Missing class docstring (missing-class-docstring)
+main_menu.py:16:0: C0103: Class name "ui_main_window" doesn't conform to PascalCase naming style (invalid-name)
+main_menu.py:57:29: W0613: Unused argument 'main_window' (unused-argument)
+main_menu.py:68:4: C0116: Missing function or method docstring (missing-function-docstring)
+main_menu.py:76:8: W0702: No exception type(s) specified (bare-except)
+main_menu.py:79:4: C0116: Missing function or method docstring (missing-function-docstring)
+main_menu.py:90:4: C0116: Missing function or method docstring (missing-function-docstring)
+main_menu.py:94:4: C0116: Missing function or method docstring (missing-function-docstring)
+main_menu.py:72:12: W0201: Attribute 'full_recipe_list' defined outside __init__ (attribute-defined-outside-init)
+main_menu.py:98:0: C0116: Missing function or method docstring (missing-function-docstring)
+main_menu.py:102:4: R1722: Consider using 'sys.exit' instead (consider-using-sys-exit)
+
+------------------------------------------------------------------
+Your code has been rated at 1.64/10
