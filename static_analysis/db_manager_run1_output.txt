@@ -1,0 +1,9 @@
+************* Module db_manager
+db_manager.py:129:0: C0303: Trailing whitespace (trailing-whitespace)
+db_manager.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+db_manager.py:47:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+db_manager.py:74:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+db_manager.py:107:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+
+------------------------------------------------------------------
+Your code has been rated at 9.04/10

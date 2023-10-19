@@ -1,0 +1,6 @@
+************* Module db_manager
+db_manager.py:130:0: C0305: Trailing newlines (trailing-newlines)
+db_manager.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+
+------------------------------------------------------------------
+Your code has been rated at 9.62/10 (previous run: 9.04/10, +0.58)

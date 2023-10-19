@@ -1,13 +1,14 @@
-# db_manager.py
-#
-# Database manager used to as a center to interface with the database
-#
-# Created by Anapat B., 27 Sep 2023
-#
-# Modified to allow query all elements from a database table
-#
-# Modified by Anapat B., 12 Oct 2023
+"""
+ db_manager.py
 
+ Database manager used to as a center to interface with the database
+
+ Created by Anapat B., 27 Sep 2023
+
+ Modified to allow query all elements from a database table
+
+ Modified by Anapat B., 12 Oct 2023
+"""
 import os
 import sqlite3
 from sqlite3 import Error
@@ -25,10 +26,9 @@ db_file = parent_dir + "/data/recipe_database.db3"
 print(db_file)
 
 
-# Establish connection with the database
 def create_connection():
     """
-    Connect with database
+    Establish connection with the database
     :return:
     """
 
@@ -40,28 +40,26 @@ def create_connection():
     return conn
 
 
-# Create element to be added to the database
-# "conn" is the connection to the database
-# "task" is elements to be added to the database
-# "table" is the name of the table to add the data to
 def create_task(conn, task, table):
     """
-    Create a new task
-    :param conn:
-    :param task:
-    :param table:
+    Create element to be added to the database
+    :param conn: Connection to the database
+    :param task: Elements to be added to the database
+    :param table: Name of the table to add the data to
     :return:
     """
 
+    cur = None
     try:
-        sql = " INSERT INTO " + table + "(" + table_dict[table][0] + ") VALUES(" + table_dict[table][1] + ") "
+        sql = (" INSERT INTO " + table + "(" + table_dict[table][0] +
+               ") VALUES(" + table_dict[table][1] + ") ")
         cur = conn.cursor()
         cur.execute(sql, task)
         conn.commit()
         print(f"{task}")
-        return cur.lastrowid
     except Error as e:
         print(e)
+    return cur.lastrowid
 
 
 # Query a search in the database
@@ -72,13 +70,14 @@ def create_task(conn, task, table):
 def db_query(conn, table, header, element):
     """
     Query data from database
-    :param conn:
-    :param table:
-    :param header:
+    :param conn: Connection to the database
+    :param table: Name of the table to query the data from
+    :param header: header of the column to query from
     :param element:
     :return:
     """
 
+    rec = None
     try:
         cur = conn.cursor()
         sql_query = "SELECT * FROM " + table + " WHERE " + header + " = ?"
@@ -89,13 +88,12 @@ def db_query(conn, table, header, element):
             return None
 
         head = table_dict[table][0].split(",")
-        for element in head:
-            print(element, end="")
+        for item in head:
+            print(item, end="")
         print()
-
-        return rec
     except Error as e:
         print(e)
+    return rec
 
 
 # Query all elements from a table
@@ -109,17 +107,14 @@ def db_searchbar_query(conn, table):
     :return:
     """
 
+    rec = None
     try:
         cur = conn.cursor()
         sql_query = "SELECT * FROM " + table
         cur.execute(sql_query)
         rec = cur.fetchall()
 
-        if not rec:
-            return None
-
         print(rec)
-
-        return rec
     except Error as e:
         print(e)
+    return rec
