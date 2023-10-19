@@ -24,3 +24,9 @@ Coding standards are okay though omit some issues like line length, file organiz
 
 Great that you are making progress with code! And your header comments have the authors!
 
+2023-10-19: Be careful with your commits. Only commit things that belong together. You have really inappropriate comments on some commits, e.g. a commit that included source code has the comment “Added Lab6 report”. 
+
+Looks like you are making good progress with your code. 
+
+BUT where is your functional test plan?
+
