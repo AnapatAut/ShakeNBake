@@ -26,14 +26,25 @@ class Ui_MainWindow(QMainWindow):
         self.centralwidget.setObjectName("centralwidget")
         self.setCentralWidget(self.centralwidget)
 
-        font = QFont()
-        font.setFamily("Verdana")
-        font.setPointSize(12)
+        prompt_font = QFont()
+        prompt_font.setFamily("Verdana")
+        prompt_font.setPointSize(12)
+
+        error_font = QFont()
+        error_font.setFamily("Verdana")
+        error_font.setPointSize(10)
+
         self.recipe_name_prompt = QLabel(self.centralwidget)
         self.recipe_name_prompt.setObjectName("recipe_name_prompt")
         self.recipe_name_prompt.setGeometry(QRect(30, 30, 91, 41))
-        self.recipe_name_prompt.setFont(font)
+        self.recipe_name_prompt.setFont(prompt_font)
         self.recipe_name_prompt.setText("Name:")
+
+        self.recipe_name_error = QLabel(self.centralwidget)
+        self.recipe_name_error.setObjectName("recipe_name_error")
+        self.recipe_name_error.setGeometry(QRect(720, 15, 141, 71))
+        self.recipe_name_error.setFont(prompt_font)
+        self.recipe_name_error.setStyleSheet("color: red;")
 
         self.recipe_name_in = QTextEdit(self.centralwidget)
         self.recipe_name_in.setObjectName("recipe_name_in")
@@ -43,7 +54,13 @@ class Ui_MainWindow(QMainWindow):
         self.ingredient_prompt = QLabel(self.centralwidget)
         self.ingredient_prompt.setObjectName("ingredient_prompt")
         self.ingredient_prompt.setGeometry(QRect(30, 60, 141, 71))
-        self.ingredient_prompt.setFont(font)
+        self.ingredient_prompt.setFont(prompt_font)
+
+        self.ingredient_error = QLabel(self.centralwidget)
+        self.ingredient_error.setObjectName("ingredient_error")
+        self.ingredient_error.setGeometry(QRect(720, 64, 141, 71))
+        self.ingredient_error.setFont(prompt_font)
+        self.ingredient_error.setStyleSheet("color: red;")
 
         self.ingredient_name_in = QTextEdit(self.centralwidget)
         self.ingredient_name_in.setObjectName("ingredient_name_in")
@@ -76,64 +93,70 @@ class Ui_MainWindow(QMainWindow):
         self.ingredient_unit_in.setGeometry(QRect(428, 81, 121, 31))
         self.ingredient_unit_in.setAutoFillBackground(False)
 
-        self.all_ingredient = QTableWidget(self.centralwidget)
-        if (self.all_ingredient.columnCount() < 3):
-            self.all_ingredient.setColumnCount(3)
+        self.ingredient_table = QTableWidget(self.centralwidget)
+        if (self.ingredient_table.columnCount() < 3):
+            self.ingredient_table.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
-        self.all_ingredient.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        self.ingredient_table.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
-        self.all_ingredient.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        self.ingredient_table.setHorizontalHeaderItem(1, __qtablewidgetitem1)
         __qtablewidgetitem2 = QTableWidgetItem()
-        self.all_ingredient.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        self.ingredient_table.setHorizontalHeaderItem(2, __qtablewidgetitem2)
 
-        self.all_ingredient.setObjectName("all_ingredients")
-        self.all_ingredient.setGeometry(QRect(180, 120, 371, 161))
-        self.ingredient_table_header = self.all_ingredient.horizontalHeader()
+        self.ingredient_table.setObjectName("ingredient_table")
+        self.ingredient_table.setGeometry(QRect(180, 120, 371, 161))
+        self.ingredient_table_header = self.ingredient_table.horizontalHeader()
         self.ingredient_table_header.setSectionResizeMode(0, QHeaderView.Stretch)
         self.ingredient_table_header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.ingredient_table_header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
-        self.all_ingredient.setSelectionMode(QTableWidget.SingleSelection)
-        self.all_ingredient.setSelectionBehavior(QTableWidget.SelectRows)
+        self.ingredient_table.setSelectionMode(QTableWidget.SingleSelection)
+        self.ingredient_table.setSelectionBehavior(QTableWidget.SelectRows)
 
         self.add_ingredient = QPushButton(self.centralwidget)
         self.add_ingredient.setObjectName("add_ingredient")
         self.add_ingredient.setGeometry(QRect(560, 80, 151, 41))
-        self.add_ingredient.clicked.connect(self.add_to_all_ingredient)
+        self.add_ingredient.clicked.connect(self.add_to_ingredient_table)
 
         self.remove_ingredient = QPushButton(self.centralwidget)
         self.remove_ingredient.setObjectName("remove_ingredient")
         self.remove_ingredient.setGeometry(QRect(560, 130, 151, 41))
-        self.remove_ingredient.clicked.connect(self.remove_from_all_ingerdient)
+        self.remove_ingredient.clicked.connect(self.remove_from_ingredient_table)
 
         self.step_prompt = QLabel(self.centralwidget)
         self.step_prompt.setObjectName("step_prompt")
         self.step_prompt.setGeometry(QRect(30, 290, 111, 31))
-        self.step_prompt.setFont(font)
+        self.step_prompt.setFont(prompt_font)
+
+        self.step_error = QLabel(self.centralwidget)
+        self.step_error.setObjectName("step_error")
+        self.step_error.setGeometry(QRect(720, 350, 141, 71))
+        self.step_error.setFont(prompt_font)
+        self.step_error.setStyleSheet("color: red;")
 
         self.step_in = QTextEdit(self.centralwidget)
         self.step_in.setObjectName("step_in")
         self.step_in.setGeometry(QRect(180, 290, 371, 81))
 
-        self.all_steps = QListWidget(self.centralwidget)
-        self.all_steps.setObjectName("all_steps")
-        self.all_steps.setGeometry(QRect(180, 380, 371, 211))
+        self.step_list = QListWidget(self.centralwidget)
+        self.step_list.setObjectName("step_list")
+        self.step_list.setGeometry(QRect(180, 380, 371, 211))
 
         self.add_step = QPushButton(self.centralwidget)
         self.add_step.setObjectName("add_step")
         self.add_step.setGeometry(QRect(570, 290, 151, 41))
-        self.add_step.clicked.connect(self.add_to_all_steps)
+        self.add_step.clicked.connect(self.add_to_step_list)
 
         self.remove_step = QPushButton(self.centralwidget)
         self.remove_step.setObjectName("remove_step")
         self.remove_step.setGeometry(QRect(570, 340, 151, 41))
-        self.remove_step.clicked.connect(self.remove_from_all_steps)
+        self.remove_step.clicked.connect(self.remove_from_step_list)
 
         self.confirm_btn = QPushButton(self.centralwidget)
         self.confirm_btn.setObjectName("confirm_btn")
         self.confirm_btn.setGeometry(QRect(570, 590, 151, 41))
         self.confirm_btn.setText("Confirm")
 
-        self.all_ingredient.raise_()
+        self.ingredient_table.raise_()
         self.recipe_name_in.raise_()
         self.confirm_btn.raise_()
         self.recipe_name_prompt.raise_()
@@ -149,21 +172,26 @@ class Ui_MainWindow(QMainWindow):
         self.add_step.raise_()
         self.remove_step.raise_()
         self.suggestion_list.raise_()
-
+        self.ingredient_error.raise_()
+        self.step_error.raise_()
+        self.recipe_name_error.raise_()
         self.name_ui()
 
     # sets the display text for each of the widgets
     def name_ui(self):
+        self.recipe_name_error.setText("NO ERROR")
         self.ingredient_prompt.setText("Ingredient(s):")
+        self.ingredient_error.setText("NO ERROR")
+        self.step_error.setText("NO ERROR")
         self.ingredient_name_in.setPlaceholderText("Enter an Ingredient Name")
         self.add_ingredient.setText("Add Ingredient")
         self.remove_ingredient.setText("Remove Ingredient")
         self.step_prompt.setText("Step(s):")
-        ___qtablewidgetitem = self.all_ingredient.horizontalHeaderItem(0)
+        ___qtablewidgetitem = self.ingredient_table.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText("Name")
-        ___qtablewidgetitem1 = self.all_ingredient.horizontalHeaderItem(1)
+        ___qtablewidgetitem1 = self.ingredient_table.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText("Amount")
-        ___qtablewidgetitem2 = self.all_ingredient.horizontalHeaderItem(2)
+        ___qtablewidgetitem2 = self.ingredient_table.horizontalHeaderItem(2)
         ___qtablewidgetitem2.setText("Unit")
 
         self.step_in.setPlaceholderText("Enter Your Receipe Steps Here One by One")
@@ -172,19 +200,23 @@ class Ui_MainWindow(QMainWindow):
 
     # formats input text, used for steps
     def format_text(self, in_string, line_length):
+        common_symbols = ['.', ',', '?', '!', ';', ':', '-', "'", '"', '(', ')', '[', ']',
+                          '{', '}', '&', '@', '#', '$', '%', '^', '*', '+', '-', '=', '>', '<']
         out_string = ""
-
-        line_num = 1
         curr_line = ""
-        for i in range(len(in_string)):
-            if in_string[i - 1].isascii() and in_string[i].isspace():
-                if int(i / line_length) >= line_num:
-                    out_string += curr_line + "\n"
+        line_num = 1
 
+        for i in range(len(in_string)):
+            if (in_string[i - 1].isalnum() or in_string[i - 1] in common_symbols) and in_string[i] == ' ':
+
+                if int(len(curr_line) / line_length) >= line_num:
+                    out_string += curr_line + "\n"
                     curr_line = ""
                     line_num += 1
+                    continue
 
-            curr_line += in_string[i]
+            if (in_string[i].isalnum()) or (in_string[i] in common_symbols) or (in_string[i] == ' '):
+                curr_line += in_string[i]
 
         if curr_line:
             out_string += curr_line
@@ -192,19 +224,17 @@ class Ui_MainWindow(QMainWindow):
         return out_string
 
     # adds the text within step_in into the all_steps
-    def add_to_all_steps(self):
-        step_text = self.step_in.toPlainText().replace('\n', '')
-
-        if step_text:
-            formatted_text = self.format_text(step_text, 60)
-            self.all_steps.addItem(formatted_text)
+    def add_to_step_list(self):
+        formatted_text = self.format_text(self.step_in.toPlainText(), 60)
+        if formatted_text:
+            self.step_list.addItem(formatted_text)
             self.step_in.clear()
 
     # removes the selected item from the list table all_steps
-    def remove_from_all_steps(self):
-        selected_items = self.all_steps.selectedItems()
+    def remove_from_step_list(self):
+        selected_items = self.step_list.selectedItems()
         for item in selected_items:
-            self.all_steps.takeItem(self.all_steps.row(item))
+            self.step_list.takeItem(self.step_list.row(item))
 
     # pulls the list of valid ingredients from the database
     def update_valid_ingredients(self):
@@ -245,7 +275,15 @@ class Ui_MainWindow(QMainWindow):
         if event.button() == Qt.LeftButton:
             self.update_valid_ingredients()
 
-    def add_to_all_ingredient(self):
+    def update_ingredient_table(self):
+        self.ingredient_table.insertRow(self.ingredient_table.rowCount())
+        for row in range(len(self.ingredient_table_data)):
+            for col in range(len(self.ingredient_table_data[row])):
+                item = QTableWidgetItem(self.ingredient_table_data[row][col])
+                item.setFlags(item.flags() & ~Qt.ItemIsEditable)
+                self.ingredient_table.setItem(row, col, item)
+
+    def add_to_ingredient_table(self):
 
         new_ingredient = self.ingredient_name_in.toPlainText().replace('\n', '')
         new_amount = str(self.ingredient_amount_in.value())
@@ -263,19 +301,12 @@ class Ui_MainWindow(QMainWindow):
         self.update_ingredient_table()
         self.ingredient_name_in.clear()
 
-    def update_ingredient_table(self):
-        self.all_ingredient.insertRow(self.all_ingredient.rowCount())
-        for row in range(len(self.ingredient_table_data)):
-            for col in range(len(self.ingredient_table_data[row])):
-                item = QTableWidgetItem(self.ingredient_table_data[row][col])
-                item.setFlags(item.flags() & ~Qt.ItemIsEditable)
-                self.all_ingredient.setItem(row, col, item)
-
-    def remove_from_all_ingerdient(self):
-        selected_row = self.all_ingredient.selectedItems()
-        if selected_row:
-            for item in selected_row:
-                print(item.text())
+    def remove_from_ingredient_table(self):
+        selected_row = -1
+        selected_row = self.ingredient_table.currentRow()
+        print(selected_row)
+        if selected_row != -1:
+            self.ingredient_table.removeRow(selected_row)
 
 
 
