@@ -1,0 +1,20 @@
+************* Module history_note
+history_note.py:88:53: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:94:71: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:95:72: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:121:19: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:14:0: E0611: No name 'QApplication' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:15:0: E0611: No name 'QWidget' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:16:0: E0611: No name 'QLabel' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:17:0: E0611: No name 'QPushButton' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:18:0: E0611: No name 'QLineEdit' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:19:0: E0611: No name 'QVBoxLayout' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:20:0: E0611: No name 'QTextEdit' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:21:0: E0611: No name 'QHBoxLayout' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:22:0: E0611: No name 'QMessageBox' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:23:0: E0611: No name 'QTableWidget' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:24:0: E0611: No name 'QTableWidgetItem' in module 'PyQt5.QtWidgets' (no-name-in-module)
+history_note.py:71:0: R0902: Too many instance attributes (11/7) (too-many-instance-attributes)
+
+------------------------------------------------------------------
+Your code has been rated at 4.12/10 (previous run: 4.12/10, +0.00)
