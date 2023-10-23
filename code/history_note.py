@@ -1,16 +1,27 @@
-#historynoteui.py
-
+"""historynoteui.py
+"""
 #Python code for UI of historynote
 
 # Created by Shine on 19 Oct 2023
 
-#Modified to have only add,delete and view in the UI as well as to be able to delete a specific row of note.
+#Modified to be able to delete specific rows
 
 #Modified by Shine on 23 Oct 2023
 import sys
 import sqlite3
 import datetime
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QLineEdit, QVBoxLayout, QTextEdit, QHBoxLayout, QMessageBox, QTableWidget, QTableWidgetItem
+
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtWidgets import QVBoxLayout
+from PyQt5.QtWidgets import QTextEdit
+from PyQt5.QtWidgets import QHBoxLayout
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QTableWidget
+from PyQt5.QtWidgets import QTableWidgetItem
 
 # Backend code starts here
 conn = sqlite3.connect('cookbook.db')
@@ -28,6 +39,7 @@ conn.commit()
 conn.close()
 
 def add_history_note(recipe_name, note):
+    """Add history note"""
     conn = sqlite3.connect('cookbook.db')
     cursor = conn.cursor()
 
@@ -42,6 +54,8 @@ def add_history_note(recipe_name, note):
     conn.close()
 
 def view_history_notes(recipe_name):
+    """View history note"""
+
     conn = sqlite3.connect('cookbook.db')
     cursor = conn.cursor()
 
@@ -56,6 +70,8 @@ def view_history_notes(recipe_name):
     return notes
 
 def delete_history_notes(recipe_name, timestamp, note):
+    """Delete history note"""
+
     conn = sqlite3.connect('cookbook.db')
     cursor = conn.cursor()
 
@@ -66,44 +82,40 @@ def delete_history_notes(recipe_name, timestamp, note):
     conn.commit()
     conn.close()
 
-# History note window
 class App(QWidget):
+    """History note window"""
     def __init__(self):
         super().__init__()
         self.title = 'Recipe History Notes'
-        self.left = 100
-        self.top = 100
-        self.width = 920
-        self.height = 680
-        self.initUI()
 
-    def initUI(self):
+        self.init_ui()
+
+    def init_ui(self):
+        """Set up the UI page"""
         self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
+        self.setGeometry(100, 100, 920, 680)
 
         self.recipe_label = QLabel('Recipe Name:')
         self.recipe_textbox = QLineEdit(self)
-
         self.write_history_label = QLabel('Write History Note:')
         self.write_history_textbox = QTextEdit(self)
-        self.write_history_textbox.setReadOnly(False)  # Set the write_history_textbox to read-only initially
-
+        self.write_history_textbox.setReadOnly(False)    
         self.history_label = QLabel('View History Note:')
         self.history_table = QTableWidget()
         self.history_table.setRowCount(0)
         self.history_table.setColumnCount(2)
         self.history_table.setHorizontalHeaderLabels(["Timestamp", "History Note"])
-        self.history_table.setEditTriggers(QTableWidget.NoEditTriggers)  # Make the table non-editable
-        self.history_table.setSelectionBehavior(QTableWidget.SelectRows)  # Set row selection behavior
+        self.history_table.setEditTriggers(QTableWidget.NoEditTriggers)  
+        self.history_table.setSelectionBehavior(QTableWidget.SelectRows)  
 
-        self.addButton = QPushButton('Add', self)
-        self.addButton.clicked.connect(self.addClicked)
+        self.add_button = QPushButton('Add', self)
+        self.add_button.clicked.connect(self.add_clicked)
 
-        self.deleteButton = QPushButton('Delete', self)
-        self.deleteButton.clicked.connect(self.deleteClicked)
+        self.delete_button = QPushButton('Delete', self)
+        self.delete_button.clicked.connect(self.delete_clicked)
 
-        self.viewButton = QPushButton('View', self)
-        self.viewButton.clicked.connect(self.viewClicked)
+        self.view_button = QPushButton('View', self)
+        self.view_button.clicked.connect(self.view_clicked)
 
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.recipe_label)
@@ -114,24 +126,23 @@ class App(QWidget):
         self.layout.addWidget(self.history_table)
 
         button_layout = QHBoxLayout()
-        button_layout.addWidget(self.addButton)
-        button_layout.addWidget(self.deleteButton)
-        button_layout.addWidget(self.viewButton)
+        button_layout.addWidget(self.add_button)
+        button_layout.addWidget(self.delete_button)
+        button_layout.addWidget(self.view_button)
 
         self.layout.addLayout(button_layout)
-
         self.setLayout(self.layout)
-        self.show()
-        
-    # Add button to add history note
-    def addClicked(self):
+        self.show()  
+
+    def add_clicked(self):
+        """Add button to add history note"""
         recipe_name = self.recipe_textbox.text()
         note = self.write_history_textbox.toPlainText()
         add_history_note(recipe_name, note)
         QMessageBox.about(self, "Success", "Note added successfully!")
 
-    # Delete button to delete history note
-    def deleteClicked(self):
+    def delete_clicked(self):
+        """Delete button to delete history note"""
         current_row = self.history_table.currentRow()
         if current_row >= 0:
             recipe_name = self.recipe_textbox.text()
@@ -141,8 +152,8 @@ class App(QWidget):
             self.history_table.removeRow(current_row)
             QMessageBox.about(self, "Success", "Note deleted successfully!")
 
-    # View button to view history note
-    def viewClicked(self):
+    def view_clicked(self):
+        """View button to view history note"""
         recipe_name = self.recipe_textbox.text()
         notes = view_history_notes(recipe_name)
         self.history_table.setRowCount(0)  # Clear the table before populating new data
