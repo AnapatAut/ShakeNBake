@@ -1,8 +1,7 @@
-************* Module history_note
-history_note.py:88:53: C0303: Trailing whitespace (trailing-whitespace)
-history_note.py:94:71: C0303: Trailing whitespace (trailing-whitespace)
-history_note.py:95:72: C0303: Trailing whitespace (trailing-whitespace)
-history_note.py:121:19: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:102:53: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:108:71: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:109:72: C0303: Trailing whitespace (trailing-whitespace)
+history_note.py:135:19: C0303: Trailing whitespace (trailing-whitespace)
 history_note.py:14:0: E0611: No name 'QApplication' in module 'PyQt5.QtWidgets' (no-name-in-module)
 history_note.py:15:0: E0611: No name 'QWidget' in module 'PyQt5.QtWidgets' (no-name-in-module)
 history_note.py:16:0: E0611: No name 'QLabel' in module 'PyQt5.QtWidgets' (no-name-in-module)
@@ -14,7 +13,10 @@ history_note.py:21:0: E0611: No name 'QHBoxLayout' in module 'PyQt5.QtWidgets' (
 history_note.py:22:0: E0611: No name 'QMessageBox' in module 'PyQt5.QtWidgets' (no-name-in-module)
 history_note.py:23:0: E0611: No name 'QTableWidget' in module 'PyQt5.QtWidgets' (no-name-in-module)
 history_note.py:24:0: E0611: No name 'QTableWidgetItem' in module 'PyQt5.QtWidgets' (no-name-in-module)
-history_note.py:71:0: R0902: Too many instance attributes (11/7) (too-many-instance-attributes)
-
-------------------------------------------------------------------
-Your code has been rated at 4.12/10 (previous run: 4.12/10, +0.00)
+history_note.py:43:4: W0621: Redefining name 'conn' from outer scope (line 27) (redefined-outer-name)
+history_note.py:44:4: W0621: Redefining name 'cursor' from outer scope (line 28) (redefined-outer-name)
+history_note.py:59:4: W0621: Redefining name 'conn' from outer scope (line 27) (redefined-outer-name)
+history_note.py:60:4: W0621: Redefining name 'cursor' from outer scope (line 28) (redefined-outer-name)
+history_note.py:75:4: W0621: Redefining name 'conn' from outer scope (line 27) (redefined-outer-name)
+history_note.py:76:4: W0621: Redefining name 'cursor' from outer scope (line 28) (redefined-outer-name)
+history_note.py:85:0: R0902: Too many instance attributes (11/7) (too-many-instance-attributes)
