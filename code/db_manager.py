@@ -4,20 +4,17 @@
  Database manager used to as a center to interface with the database
 
  Created by Anapat B., 27 Sep 2023
-
- Modified to allow query all elements from a database table
-
- Modified by Anapat B., 12 Oct 2023
 """
 import os
 import sqlite3
 from sqlite3 import Error
 
 table_dict = {
-    "main": ["recipe_id, name, ingredients, steps", "?, ?, ?, ?"],
+    "main": ["recipe_id, name", "?, ?"],
     "ingredient_list": ["id, name", "?, ?"],
     "recipe_ingredients": ["recipe_id, name, amount, measurement", "?, ?, ?, ?"],
-    "recipe_steps": ["id, step_number, step_instruction", "?, ?, ?"]
+    "recipe_steps": ["recipe_id, step_number, step_instruction", "?, ?, ?"],
+    "history_note": ["history_id", "recipe_id", "note_details", "timestamp", "?, ?, ?, ?"]
 }
 
 current_dir = os.path.dirname(__file__)
