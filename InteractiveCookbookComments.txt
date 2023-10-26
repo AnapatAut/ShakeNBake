@@ -32,7 +32,7 @@ BUT where is your functional test plan?
 
 2023-10-26: Only commit things that have changed. You apparently committed every file in the software_engineering_processes directory, with the commit comment “Updated coding standards”.
 
-STILL no test plan. 
+Test plan looks pretty good, but you should commit the spreadsheet source (.xlsx) not the pdf.
 
 Very good that you ran static analysis on multiple files... BUT your version 2 output still shows problems (including ones that look serious). The whole idea is to get rid of problems. 
 
