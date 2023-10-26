@@ -116,7 +116,7 @@ class ui_main_window(QMainWindow):
         :return:
         """
         conn = db.create_connection()
-        query = db.db_searchbar_query(conn, "main")
+        query = db.db_query_table(conn, "main")
         try:
             self.full_recipe_list = []
             for recipes in query:
