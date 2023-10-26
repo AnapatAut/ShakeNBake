@@ -146,7 +146,7 @@ class ui_main_window(QMainWindow):
         :return:
         """
         conn = db.create_connection()
-        query = db.db_searchbar_query(conn, "recipe_ingredients")
+        query = db.db_query_table(conn, "recipe_ingredients")
         try:
             self.full_ingredient_list = defaultdict(list)
             for ingredient in query:
