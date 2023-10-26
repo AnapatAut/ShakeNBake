@@ -12,6 +12,7 @@
 
 #Modified for history note text box size
 #Modified for limit text size input of note
+#Modified to add back button to go to recipe page
 
 
 
@@ -129,6 +130,9 @@ class App(QWidget):
         self.view_button = QPushButton('View', self)
         self.view_button.clicked.connect(self.view_clicked)
 
+        # self.back_button = QPushButton('Back', self)
+        # self.back_button.clicked.connect(self.back_clicked)
+
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.recipe_label)
         self.layout.addWidget(self.recipe_textbox)
@@ -141,6 +145,10 @@ class App(QWidget):
         button_layout.addWidget(self.add_button)
         button_layout.addWidget(self.delete_button)
         button_layout.addWidget(self.view_button)
+
+        self.back_button = QPushButton('Back', self)
+        self.back_button.clicked.connect(self.back_clicked)
+        button_layout.addWidget(self.back_button)
 
         self.layout.addLayout(button_layout)
         self.setLayout(self.layout)
@@ -180,6 +188,10 @@ class App(QWidget):
                 self.history_table.insertRow(row)
                 self.history_table.setItem(row, 0, QTableWidgetItem(timestamp))
                 self.history_table.setItem(row, 1, QTableWidgetItem(note))
+
+    def back_clicked(self):
+        print("Go back to recipe page")
+        self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
