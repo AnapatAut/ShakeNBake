@@ -30,3 +30,12 @@ Looks like you are making good progress with your code.
 
 BUT where is your functional test plan?
 
+2023-10-26: Only commit things that have changed. You apparently committed every file in the software_engineering_processes directory, with the commit comment “Updated coding standards”.
+
+STILL no test plan. 
+
+Very good that you ran static analysis on multiple files... BUT your version 2 output still shows problems (including ones that look serious). The whole idea is to get rid of problems. 
+
+You do not have any code review report that I can find. This was required.
+
+You seem to be making good progress with the code.
