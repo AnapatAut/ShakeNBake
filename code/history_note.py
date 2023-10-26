@@ -4,9 +4,19 @@
 
 # Created by Shine on 19 Oct 2023
 
+#Modified by Shine on 23 Oct 2023
+
 #Modified to be able to delete specific rows
 
-#Modified by Shine on 23 Oct 2023
+#Modified by Shine on 26 Oct 2023
+
+#Modified for history note text box size
+#Modified for limit text size input of note
+#Modified to add back button to go to recipe page
+
+
+
+
 import sys
 import sqlite3
 import datetime
@@ -22,6 +32,7 @@ from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QTableWidget
 from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QSizePolicy
 
 # Backend code starts here
 conn = sqlite3.connect('cookbook.db')
@@ -99,7 +110,9 @@ class App(QWidget):
         self.recipe_textbox = QLineEdit(self)
         self.write_history_label = QLabel('Write History Note:')
         self.write_history_textbox = QTextEdit(self)
-        self.write_history_textbox.setReadOnly(False)    
+        self.write_history_textbox.setReadOnly(False)
+        self.write_history_textbox.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.write_history_textbox.setMaximumHeight(50)  # Set the maximum height as needed
         self.history_label = QLabel('View History Note:')
         self.history_table = QTableWidget()
         self.history_table.setRowCount(0)
@@ -117,6 +130,9 @@ class App(QWidget):
         self.view_button = QPushButton('View', self)
         self.view_button.clicked.connect(self.view_clicked)
 
+        # self.back_button = QPushButton('Back', self)
+        # self.back_button.clicked.connect(self.back_clicked)
+
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.recipe_label)
         self.layout.addWidget(self.recipe_textbox)
@@ -130,6 +146,10 @@ class App(QWidget):
         button_layout.addWidget(self.delete_button)
         button_layout.addWidget(self.view_button)
 
+        self.back_button = QPushButton('Back', self)
+        self.back_button.clicked.connect(self.back_clicked)
+        button_layout.addWidget(self.back_button)
+
         self.layout.addLayout(button_layout)
         self.setLayout(self.layout)
         self.show()  
@@ -138,8 +158,11 @@ class App(QWidget):
         """Add button to add history note"""
         recipe_name = self.recipe_textbox.text()
         note = self.write_history_textbox.toPlainText()
-        add_history_note(recipe_name, note)
-        QMessageBox.about(self, "Success", "Note added successfully!")
+        if len(note) <= 248:
+            add_history_note(recipe_name, note)
+            QMessageBox.about(self, "Success", "Note added successfully!")
+        else:
+            QMessageBox.about(self, "Error", "The number of characters is larger than the maximum limit 248. Please input again.")
 
     def delete_clicked(self):
         """Delete button to delete history note"""
@@ -165,6 +188,10 @@ class App(QWidget):
                 self.history_table.insertRow(row)
                 self.history_table.setItem(row, 0, QTableWidgetItem(timestamp))
                 self.history_table.setItem(row, 1, QTableWidgetItem(note))
+
+    def back_clicked(self):
+        print("Go back to recipe page")
+        self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
