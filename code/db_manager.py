@@ -59,11 +59,6 @@ def create_task(conn, task, table):
     return cur.lastrowid
 
 
-# Query a search in the database
-# "conn" is the connection to the database
-# "table" is the name of the table to query the data from
-# "header" is the header of the column to query from
-# "element" is the element we want to find
 def db_query(conn, table, header, element):
     """
     Query data from database
@@ -93,10 +88,7 @@ def db_query(conn, table, header, element):
     return rec
 
 
-# Query all elements from a table
-# "conn" is the connection to the database
-# "table" is the name of the table to query the data from
-def db_searchbar_query(conn, table):
+def db_query_table(conn, table):
     """
     Query data from database
     :param conn:
@@ -115,3 +107,21 @@ def db_searchbar_query(conn, table):
     except Error as e:
         print(e)
     return rec
+
+
+def query_max_id(conn, table):
+    """
+    Find the max id from the database
+    :param conn: Connection to the database
+    :param table: Name of the table to query the data from
+    :return:
+    """
+    max_id = 0
+    try:
+        query = db_query_table(conn, table)
+        for curr_id in query:
+            if curr_id[0] > max_id:
+                max_id = curr_id[0]
+    except Error as e:
+        print(e)
+    return max_id
