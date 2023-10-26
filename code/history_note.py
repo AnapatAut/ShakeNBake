@@ -4,9 +4,18 @@
 
 # Created by Shine on 19 Oct 2023
 
+#Modified by Shine on 23 Oct 2023
+
 #Modified to be able to delete specific rows
 
-#Modified by Shine on 23 Oct 2023
+#Modified by Shine on 26 Oct 2023
+
+#Modified for history note text box size
+#Modified for limit text size input of note
+
+
+
+
 import sys
 import sqlite3
 import datetime
@@ -22,6 +31,7 @@ from PyQt5.QtWidgets import QHBoxLayout
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtWidgets import QTableWidget
 from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QSizePolicy
 
 # Backend code starts here
 conn = sqlite3.connect('cookbook.db')
@@ -99,7 +109,9 @@ class App(QWidget):
         self.recipe_textbox = QLineEdit(self)
         self.write_history_label = QLabel('Write History Note:')
         self.write_history_textbox = QTextEdit(self)
-        self.write_history_textbox.setReadOnly(False)    
+        self.write_history_textbox.setReadOnly(False)
+        self.write_history_textbox.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.write_history_textbox.setMaximumHeight(50)  # Set the maximum height as needed
         self.history_label = QLabel('View History Note:')
         self.history_table = QTableWidget()
         self.history_table.setRowCount(0)
@@ -138,8 +150,11 @@ class App(QWidget):
         """Add button to add history note"""
         recipe_name = self.recipe_textbox.text()
         note = self.write_history_textbox.toPlainText()
-        add_history_note(recipe_name, note)
-        QMessageBox.about(self, "Success", "Note added successfully!")
+        if len(note) <= 248:
+            add_history_note(recipe_name, note)
+            QMessageBox.about(self, "Success", "Note added successfully!")
+        else:
+            QMessageBox.about(self, "Error", "The number of characters is larger than the maximum limit 248. Please input again.")
 
     def delete_clicked(self):
         """Delete button to delete history note"""
