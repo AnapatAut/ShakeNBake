@@ -1,10 +1,25 @@
 """This file gereates a window that displays the recipe of each menu item"""
 
+
+import sqlite3
+import datetime
+
 import sys
 import math
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTableWidget, QTableWidgetItem, QLabel
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QTableWidget
+from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QListWidget
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
+import db_manager as db
+
+
+
 
 class MainWindow(QMainWindow):
     """Generates the window"""
@@ -42,10 +57,10 @@ class MainWindow(QMainWindow):
 
         # The add Note button
         self.add_note_btn = QPushButton(self.centralwidget)
-        self.add_note_btn.setObjectName("add_note_btn")
         self.add_note_btn.setGeometry(QRect(700, 81 , 170, 60))
-        self.add_note_btn.setText("Add Note")
-        self.add_note_btn.clicked.connect(self.window2)
+        self.add_note_btn.setObjectName("add_note_btn")
+        # self.add_note_btn.setText("Add Note")
+        self.add_note_btn.clicked.connect(self.get_recipe_name)
 
 
         # The notes table
@@ -131,6 +146,16 @@ class MainWindow(QMainWindow):
         self.window = input_window()
         self.window.show()
         self.window.move(700, 200)
+
+    def get_recipe_name(self):
+        recipe_name = "recipe-name"
+        conn = db.create_connection()
+        
+        curr_id = db.query_max_id(conn, "main") + 1
+
+        db.create_task(conn, [curr_id, recipe_name], "main")
+        
+        print("added")
 
 
 class input_window(QMainWindow):
