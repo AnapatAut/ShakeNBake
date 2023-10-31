@@ -50,17 +50,19 @@ class MainWindow(QMainWindow):
 
 
         # The remove button
+        location = "recipe_display"
         self.remove_btn = QPushButton(self.centralwidget)
-        self.remove_btn.setObjectName("RemoveBtn")
+        self.remove_btn.setObjectName("push")
         self.remove_btn.setGeometry(QRect(820, 620, 80, 30))
         self.remove_btn.setText("Remove")       
+        self.remove_btn.clicked.connect(self.pushing_recipe_steps)
 
         # The add Note button
         self.add_note_btn = QPushButton(self.centralwidget)
         self.add_note_btn.setGeometry(QRect(700, 81 , 170, 60))
         self.add_note_btn.setObjectName("add_note_btn")
-        # self.add_note_btn.setText("Add Note")
-        self.add_note_btn.clicked.connect(self.get_recipe_name)
+        self.add_note_btn.setText("pull")
+        self.add_note_btn.clicked.connect(self.reading_recipe_steps)
 
 
         # The notes table
@@ -147,16 +149,24 @@ class MainWindow(QMainWindow):
         self.window.show()
         self.window.move(700, 200)
 
-    def get_recipe_name(self):
-        recipe_name = "recipe-name"
+    
+
+    def pushing_recipe_steps(self):
         conn = db.create_connection()
         
-        curr_id = db.query_max_id(conn, "main") + 1
+        curr_id = db.query_max_id(conn, "recipe_steps") + 1
 
-        db.create_task(conn, [curr_id, recipe_name], "main")
+        task = (curr_id ,12 , "task")
+
+        db.create_task(conn, task, "recipe_steps")
         
         print("added")
 
+
+    def reading_recipe_steps(self):
+        conn = db.create_connection()
+        out_list = db.db_query_table(conn, "recipe_steps")
+        print(out_list)
 
 class input_window(QMainWindow):
     def __init__(self):
