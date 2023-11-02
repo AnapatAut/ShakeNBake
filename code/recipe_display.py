@@ -22,6 +22,8 @@ import db_manager as db
 
 
 class MainWindow(QMainWindow):
+
+    recipe_id = 2
     """Generates the window"""
     def __init__(self):
         super().__init__()
@@ -64,7 +66,7 @@ class MainWindow(QMainWindow):
         self.add_note_btn.setGeometry(QRect(700, 81 , 170, 60))
         self.add_note_btn.setObjectName("add_note_btn")
         self.add_note_btn.setText("Add notes")
-        self.add_note_btn.clicked.connect(self.reading_recipe_steps)
+
 
 
         # The notes table
@@ -80,11 +82,7 @@ class MainWindow(QMainWindow):
         self.notes_widget.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.notes_widget.verticalHeader().setVisible(False)
         self.notes_widget.horizontalHeader().setVisible(False)
-
-
-            
         
-
         for row in range(5):
             notes = QTableWidgetItem(f"Ingredient {row + 1}")
             self.notes_widget.setItem(row, 0, notes)
@@ -111,7 +109,7 @@ class MainWindow(QMainWindow):
         self.ingredient_widget.setColumnWidth(1, colum_wid)
         self.ingredient_widget.setColumnWidth(2, colum_wid)
         self.ingredient_widget.verticalHeader().setVisible(False)
-        self.reading_recipe_ingredient()
+        self.reading_recipe_ingredient(self.recipe_id)
         self.populate_ingredient_table()
 
 
@@ -129,7 +127,7 @@ class MainWindow(QMainWindow):
         self.step_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.step_table.verticalHeader().setVisible(False)
         self.step_table.setColumnWidth(1, colum_wid)
-        self.reading_recipe_steps()
+        self.reading_recipe_steps(self.recipe_id)
         self.populate_steps_table()
     
 
@@ -137,6 +135,10 @@ class MainWindow(QMainWindow):
         font.setPointSize(20)  # Set the font size to 14
         font.setBold(True)  # Make the text bold
         self.text_label.setFont(font)
+
+
+    
+
 
     def pushing_recipe_steps(self):
         """
@@ -153,6 +155,13 @@ class MainWindow(QMainWindow):
         print("added")
 
 
+    def reading_recipe_steps(self , recipe_id):
+        """
+        Reads all the data in recipe_steps and prints it out
+        """
+        conn = db.create_connection()
+        self.steps_data = db.db_query(conn, "recipe_steps", "recipe_id", recipe_id)
+        
     def populate_steps_table(self):
         """
         This read the db on recipe_steps and populate the corrisponding table with the data
@@ -165,20 +174,12 @@ class MainWindow(QMainWindow):
             step_instrution = QTableWidgetItem(f"{self.steps_data[row][2]}")
             self.step_table.setItem(row, 1, step_instrution)
 
-
-    def reading_recipe_steps(self):
-        """
-        Reads all the data in recipe_steps and prints it out
-        """
-        conn = db.create_connection()
-        self.steps_data = db.db_query_table(conn, "recipe_steps")
-        
-    def reading_recipe_ingredient(self):
+    def reading_recipe_ingredient(self , recipe_id):
         """
         Reads all the data in recipe_ingredient and prints it out
         """
         conn = db.create_connection()
-        self.ingredient_data = db.db_query_table(conn, "recipe_ingredients")
+        self.ingredient_data = db.db_query(conn, "recipe_ingredients", "recipe_id", recipe_id)
 
     def populate_ingredient_table(self):
         """
