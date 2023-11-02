@@ -386,8 +386,10 @@ class Ui_MainWindow(QMainWindow):
         self.ingredient_error.show()
         self.step_error.show()
 
+        self.all_status = 1
         if self.name_status == 0 and self.ingredient_status == 0 and self.step_status == 0:
             self.add2database()
+            self.all_status = 0
 
     def validate_recipe_name(self):
         """
