@@ -81,8 +81,6 @@ class ui_main_window(QMainWindow):
 
         self.recipe_list_widget.itemClicked.connect(self.view_recipe)
 
-        self.add_recipe_widget.clicked.connect(self.add_recipe)
-
         self.update_recipe_list()
 
     def toggle_search(self):
@@ -90,25 +88,34 @@ class ui_main_window(QMainWindow):
         Toggle search between search by recipe and ingredient
         :return:
         """
-        self.get_recipe_list()
         self.search_bar_widget.clear()
         self.ingredient_search_indicator.clear()
+        self.get_recipe_list()
+        self.get_ingredient_list()
+        self.display_all_recipes()
+
         if self.search_toggle_widget.isChecked():
             print("Search Ingredient")
             self.search_bar_widget.setPlaceholderText(
                 QCoreApplication.translate("Main Menu", "Search Ingredient (Use ';' as separator)"))
             self.search_confirm_widget.show()
-            self.get_ingredient_list()
-            # self.update_ingredient_list()
-            # self.search_bar_widget.textChanged()
             self.search_confirm_widget.clicked.connect(self.update_ingredient_list)
         else:
             print("Search Recipe")
             self.search_bar_widget.setPlaceholderText(
                 QCoreApplication.translate("Main Menu", "Search Recipe"))
             self.search_confirm_widget.hide()
-
             self.search_bar_widget.textChanged.connect(self.update_recipe_list)
+
+    def display_all_recipes(self):
+        """
+        Display all the recipes in the database
+        :return:
+        """
+        self.recipe_list_widget.clear()
+        self.ingredient_list_widget.clear()
+        for recipe in self.full_recipe_list:
+            self.add_display_list(recipe[0])
 
     def get_recipe_list(self):
         """
@@ -180,12 +187,11 @@ class ui_main_window(QMainWindow):
                 if input in self.full_ingredient_list[recipe_id]:
                     found += 1
             if found == len(str_input):
-                ingredients = self.full_ingredient_list[recipe_id][0]
                 self.add_display_list(recipe_id)
+            else:
+                self.ingredient_search_indicator.setText("Recipe with inserted ingredients does not exist")
 
     def add_display_list(self, recipe_id):
-        ingredient_list = []
-        count = 0
         conn = db.create_connection()
         self.recipe_list_widget.addItem(db.db_query(conn, "main", "recipe_id", recipe_id)[0][1])
         query = db.db_query(conn, "recipe_ingredients", "recipe_id", recipe_id)
@@ -202,14 +208,10 @@ class ui_main_window(QMainWindow):
         :param item: Recipe the user selected
         :return:
         """
-        print("Go to View Recipe Menu for: " + item.text())
-
-    def add_recipe(self):
-        """
-        Go to the Add Recipe page
-        :return:
-        """
-        print("Go to Add Recipe Menu")
+        conn = db.create_connection()
+        query = db.db_query(conn, "main", "name", item.text())
+        self.recipe_id = query[0][0]
+        print("Go to View Recipe Menu for: " + item.text() + "; ID: " + str(self.recipe_id))
 
 
 def main():
