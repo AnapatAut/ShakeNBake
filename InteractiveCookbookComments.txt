@@ -39,3 +39,10 @@ Very good that you ran static analysis on multiple files... BUT your version 2 o
 You do not have any code review report that I can find. This was required.
 
 You seem to be making good progress with the code.
+
+2023-11-02: Very good deployment plan. However, I do not use Ubuntu Linux...
+
+It also seems that you will need to do an awful lot of work to handle these alternatives.
+
+
+
