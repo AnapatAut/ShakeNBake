@@ -178,15 +178,19 @@ class Ui_MainWindow(QMainWindow):
 
         self.confirm_btn = QPushButton(self.centralwidget)
         self.confirm_btn.setObjectName("confirm_btn")
-        self.confirm_btn.setGeometry(QRect(570, 590, 151, 41))
+        self.confirm_btn.setGeometry(QRect(570, 610, 151, 41))
         self.confirm_btn.setText("Confirm")
         self.name_status, self.ingredient_status, self.step_status = 0, 0, 0
         self.confirm_btn.clicked.connect(self.validate_and_add_new_recipe)
 
 
+        self.cancel_btn = QPushButton(self.centralwidget)
+        self.cancel_btn.setObjectName("cancel_btn")
+        self.cancel_btn.setGeometry(QRect(400, 610, 151, 41))
+        self.cancel_btn.setText("Cancel")
+
         self.ingredient_table.raise_()
         self.recipe_name_in.raise_()
-        self.confirm_btn.raise_()
         self.recipe_name_prompt.raise_()
         self.ingredient_prompt.raise_()
         self.add_ingredient.raise_()
@@ -203,6 +207,8 @@ class Ui_MainWindow(QMainWindow):
         self.ingredient_error.raise_()
         self.step_error.raise_()
         self.recipe_name_error.raise_()
+        self.confirm_btn.raise_()
+        self.cancel_btn.raise_()
 
     def format_text(self, in_string, line_length):
         """
@@ -398,7 +404,7 @@ class Ui_MainWindow(QMainWindow):
 
         query = [item[1] for item in query]
 
-        in_string = self.recipe_name_in.toPlainText()
+        in_string = self.recipe_name_in.toPlainText().capitalize()
         if len(in_string) <= 0:
             return 1
         elif len(in_string) >= 64:
@@ -440,7 +446,7 @@ class Ui_MainWindow(QMainWindow):
         Adding the information given by the user to the application's database
         :return:
         """
-        recipe_name = self.recipe_name_in.toPlainText()
+        recipe_name = self.recipe_name_in.toPlainText().capitalize()
         ingredients = self.ingredient_table_data
         steps = []
 
