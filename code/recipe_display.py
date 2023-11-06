@@ -71,12 +71,6 @@ class MainWindow(QMainWindow):
         font.setPointSize(20)  # Set the font size to 14
         font.setBold(True)  # Make the text bold
         self.text_label.setFont(font)
-
-
-
-
-    
-
         self.init_tables()
 
 
