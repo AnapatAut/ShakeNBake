@@ -72,29 +72,37 @@ class MainWindow(QMainWindow):
         font.setBold(True)  # Make the text bold
         self.text_label.setFont(font)
 
+
+
+
+    
+
+        self.init_tables()
+
+
+
+
+    def init_ingredient_table(self):
         # set the colum width for the ingredient table
-        table_width = 630
+        self.table_width = 630
         ingredient_row_count = 6
-        colum_wid = math.floor(table_width / 4) + 8
+        colum_wid = math.floor(self.table_width / 4) + 8
         self.ingredient_table = QTableWidget(self.centralwidget)
-        self.ingredient_table.setGeometry(QRect(35, 80, table_width, 261))
+        self.ingredient_table.setGeometry(QRect(35, 80, self.table_width, 261))
         self.ingredient_table.setColumnCount(4)
-        self.ingredient_table.setHorizontalHeaderLabels(["Ingredient Number", "Ingredient", "amount", "Unit"])
         self.ingredient_table.setColumnWidth(0, colum_wid)
         self.ingredient_table.setColumnWidth(1, colum_wid)
         self.ingredient_table.setColumnWidth(2, colum_wid)
         self.ingredient_table.verticalHeader().setVisible(False)
+        self.ingredient_table.setHorizontalHeaderLabels(["ingredient number", "Ingredient", "Amount", "Unit"])
         self.ingredient_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-
-
-
-
+    def init_step_table(self):
         # set the colum width for the ingredient table
         step_row_count = 10
         colum_wid = 500
         self.step_table = QTableWidget(self.centralwidget)
-        self.step_table.setGeometry(QRect(35, 370, table_width, 261))
+        self.step_table.setGeometry(QRect(35, 370, self.table_width, 261))
         self.step_table.setColumnCount(2)
         self.step_table.setHorizontalHeaderLabels(["Steps:", "Column 2"])
         self.step_table.setColumnWidth(0,100)
@@ -104,21 +112,21 @@ class MainWindow(QMainWindow):
         self.step_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
 
-
-
-        self.read_all_data()
-
-
-    def read_all_data(self):
+    def init_tables(self):
         """
         reads all the data and populate all the tables
         """
+        self.init_ingredient_table()
+        self.init_step_table()
         self.reading_main(self.recipe_id)
         self.reading_recipe_steps(self.recipe_id)
         self.reading_recipe_ingredient(self.recipe_id)
         self.text_label.setText(self.main_data[0][1])
         self.populate_steps_table()
         self.populate_ingredient_table()
+        
+
+        
 
 
     def reading_main(self , recipe_id):
