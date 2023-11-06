@@ -155,13 +155,13 @@ class MainWindow(QMainWindow):
             self.num_steps = len(self.steps_data)
         else:
             self.num_steps = 0
-            self.step_table.setRowCount(self.num_steps)
-            for row in range(self.num_steps):
-                step_number = QTableWidgetItem(f"{self.steps_data[row][1]}")
-                step_number.setTextAlignment(Qt.AlignCenter)
-                self.step_table.setItem(row, 0, step_number)
-                step_instrution = QTableWidgetItem(f"{self.steps_data[row][2]}")
-                self.step_table.setItem(row, 1, step_instrution)
+        self.step_table.setRowCount(self.num_steps)
+        for row in range(self.num_steps):
+            step_number = QTableWidgetItem(f"{self.steps_data[row][1]}")
+            step_number.setTextAlignment(Qt.AlignCenter)
+            self.step_table.setItem(row, 0, step_number)
+            step_instrution = QTableWidgetItem(f"{self.steps_data[row][2]}")
+            self.step_table.setItem(row, 1, step_instrution)
             
 
     def reading_recipe_ingredient(self , recipe_id):
