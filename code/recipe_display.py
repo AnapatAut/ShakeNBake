@@ -121,7 +121,10 @@ class MainWindow(QMainWindow):
         self.reading_main(self.recipe_id)
         self.reading_recipe_steps(self.recipe_id)
         self.reading_recipe_ingredient(self.recipe_id)
-        self.text_label.setText(self.main_data[0][1])
+        if self.main_data is not None:
+            self.text_label.setText(self.main_data[0][1])
+        else:
+            self.text_label.setText("The recipe has no name")
         self.populate_steps_table()
         self.populate_ingredient_table()
         
@@ -148,14 +151,18 @@ class MainWindow(QMainWindow):
         """
         This read the db on recipe_steps and populate the corrisponding table with the data
         """
-        self.num_steps = len(self.steps_data)
-        self.step_table.setRowCount(self.num_steps)
-        for row in range(self.num_steps):
-            step_number = QTableWidgetItem(f"{self.steps_data[row][1]}")
-            step_number.setTextAlignment(Qt.AlignCenter)
-            self.step_table.setItem(row, 0, step_number)
-            step_instrution = QTableWidgetItem(f"{self.steps_data[row][2]}")
-            self.step_table.setItem(row, 1, step_instrution)
+        if self.steps_data is not None:
+            self.num_steps = len(self.steps_data)
+        else:
+            self.num_steps = 0
+            self.step_table.setRowCount(self.num_steps)
+            for row in range(self.num_steps):
+                step_number = QTableWidgetItem(f"{self.steps_data[row][1]}")
+                step_number.setTextAlignment(Qt.AlignCenter)
+                self.step_table.setItem(row, 0, step_number)
+                step_instrution = QTableWidgetItem(f"{self.steps_data[row][2]}")
+                self.step_table.setItem(row, 1, step_instrution)
+            
 
     def reading_recipe_ingredient(self , recipe_id):
         """
@@ -168,7 +175,10 @@ class MainWindow(QMainWindow):
         """
         This func populates the ingredient list tables
         """
-        self.ingredient_row = len(self.ingredient_data)
+        if self.ingredient_data is not None:
+            self.ingredient_row = len(self.ingredient_data)
+        else:
+            self.ingredient_row = 0
         self.ingredient_table.setRowCount(self.ingredient_row)
         for row in range(self.ingredient_row):
             ingredient_number = QTableWidgetItem(f"{row + 1}")
