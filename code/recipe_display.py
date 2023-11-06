@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtWidgets import QTableWidget
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QAbstractItemView
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
 import db_manager as db
@@ -78,12 +79,12 @@ class MainWindow(QMainWindow):
         self.ingredient_table = QTableWidget(self.centralwidget)
         self.ingredient_table.setGeometry(QRect(35, 80, table_width, 261))
         self.ingredient_table.setColumnCount(4)
-        self.ingredient_table.setRowCount(ingredient_row_count)
         self.ingredient_table.setHorizontalHeaderLabels(["Ingredient Number", "Ingredient", "amount", "Unit"])
         self.ingredient_table.setColumnWidth(0, colum_wid)
         self.ingredient_table.setColumnWidth(1, colum_wid)
         self.ingredient_table.setColumnWidth(2, colum_wid)
         self.ingredient_table.verticalHeader().setVisible(False)
+        self.ingredient_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
 
 
@@ -96,12 +97,11 @@ class MainWindow(QMainWindow):
         self.step_table.setGeometry(QRect(35, 370, table_width, 261))
         self.step_table.setColumnCount(2)
         self.step_table.setHorizontalHeaderLabels(["Steps:", "Column 2"])
-        self.step_table.setRowCount(step_row_count)
         self.step_table.setColumnWidth(0,100)
         self.step_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.step_table.verticalHeader().setVisible(False)
         self.step_table.setColumnWidth(1, colum_wid)
-
+        self.step_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
 
 
@@ -140,8 +140,9 @@ class MainWindow(QMainWindow):
         """
         This read the db on recipe_steps and populate the corrisponding table with the data
         """
-        num_steps = len(self.steps_data)
-        for row in range(num_steps):
+        self.num_steps = len(self.steps_data)
+        self.step_table.setRowCount(self.num_steps)
+        for row in range(self.num_steps):
             step_number = QTableWidgetItem(f"{self.steps_data[row][1]}")
             step_number.setTextAlignment(Qt.AlignCenter)
             self.step_table.setItem(row, 0, step_number)
@@ -159,8 +160,9 @@ class MainWindow(QMainWindow):
         """
         This func populates the ingredient list tables
         """
-        ingredient_row = len(self.ingredient_data)
-        for row in range(ingredient_row):
+        self.ingredient_row = len(self.ingredient_data)
+        self.ingredient_table.setRowCount(self.ingredient_row)
+        for row in range(self.ingredient_row):
             ingredient_number = QTableWidgetItem(f"{row + 1}")
             ingredient_number.setTextAlignment(Qt.AlignCenter)
             self.ingredient_table.setItem(row, 0, ingredient_number)
