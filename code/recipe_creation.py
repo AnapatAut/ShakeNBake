@@ -470,6 +470,21 @@ class Ui_MainWindow(QMainWindow):
         for i in range(len(steps)):
             db.create_task(conn, [curr_id, (i + 1), steps[i]], "recipe_steps")
 
+    def clear_all(self):
+        """
+        clearing data from all the input and display fields, done every time the page is called from ui_control
+        :return:
+        """
+        self.recipe_name_in.clear()
+        self.ingredient_name_in.clear()
+        self.ingredient_amount_in.setValue(0.5)
+        self.ingredient_unit_in.setCurrentIndex(0)
+        self.ingredient_table_data.clear()
+        self.used_ingredients.clear()
+        self.ingredient_table.setRowCount(0)
+        self.step_in.clear()
+        self.step_list.clear()
+
 def main():
     app = QApplication(sys.argv)
     window = Ui_MainWindow()
