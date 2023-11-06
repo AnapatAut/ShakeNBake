@@ -38,8 +38,13 @@ class ui_control(QMainWindow):
         self.stacked_widget.setCurrentIndex(0)
 
         self.main_menu_page.add_recipe_widget.clicked.connect(self.to_recipe_creation)
+        self.main_menu_page.recipe_list_widget.itemClicked.connect(self.to_recipe_display)
         self.recipe_creation_page.confirm_btn.clicked.connect(self.recipe_creation_confirm)
         self.recipe_creation_page.cancel_btn.clicked.connect(self.to_main_menu)
+        self.recipe_display_page.add_note_btn.clicked.connect(self.to_history_notes)
+        self.history_note_page.back_button.clicked.connect(self.to_recipe_display)
+        self.recipe_display_page.back_btn.clicked.connect(self.to_main_menu)
+        self.recipe_display_page.add_note_btn.clicked.connect(self.to_history_notes)
         central_widget = QWidget()
         central_widget.setLayout(main_layout)
         self.setCentralWidget(central_widget)
@@ -55,12 +60,18 @@ class ui_control(QMainWindow):
         self.main_menu_page.display_all_recipes()
 
     def to_recipe_creation(self):
+        self.recipe_creation_page.clear_all()
         self.stacked_widget.setCurrentIndex(1)
 
+
     def to_recipe_display(self):
+        self.recipe_display_page.recipe_id = self.main_menu_page.recipe_id
+        self.recipe_display_page.clear_all_data()
+        self.recipe_display_page.init_tables()
         self.stacked_widget.setCurrentIndex(2)
 
-    def to_history_creation(self):
+    def to_history_notes(self):
+        # self.history_note_page.
         self.stacked_widget.setCurrentIndex(3)
 
 
