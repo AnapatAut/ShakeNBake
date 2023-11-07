@@ -141,6 +141,7 @@ def db_remove_all(conn, recipe_id):
             if table is not "ingredient_list":
                 sql_query = "DELETE FROM " + table + " WHERE recipe_id = " + str(recipe_id)
                 cur.execute(sql_query)
+                conn.commit()
 
     except Error as e:
         print(e)
