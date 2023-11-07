@@ -161,7 +161,7 @@ def db_remove_history_notes(conn, history_id, recipe_id):
         cur = conn.cursor()
 
         sql_query = "DELETE FROM history_note  WHERE history_id = ? AND recipe_id = ?"
-        cur.execute(sql_query, (history_id,), (recipe_id,))
+        cur.execute(sql_query, (history_id, recipe_id))
         conn.commit()
     except Error as e:
         print(e)
