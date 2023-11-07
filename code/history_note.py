@@ -40,6 +40,8 @@ from PyQt5.QtWidgets import QTableWidget
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtWidgets import QSizePolicy
 from PyQt5.QtWidgets import QHeaderView
+from PyQt5.QtGui import QFont
+from PyQt5.QtCore import QRect, Qt
 
 # Backend code starts here
 conn = sqlite3.connect('cookbook.db')
@@ -105,16 +107,25 @@ class App(QWidget):
     def __init__(self):
         super().__init__()
         self.title = 'Recipe History Notes'
-
+        self.recipe_id = 2
+        self.recipe_list = [(1, 'Kosher salt'), (2, 'Fine salt'), (3, 'Black peppercorns'), (4, 'Extra virgin olive oil')]
         self.init_ui()
 
     def init_ui(self):
         """Set up the UI page"""
+        
         self.setWindowTitle(self.title)
         self.setGeometry(100, 100, 920, 680)
 
-        self.recipe_label = QLabel('Recipe Name:')
-        self.recipe_textbox = QLineEdit(self)
+        self.recipe_label = QLabel(
+        f'<html><head/><body><p><span style=" font-size:20pt; font-weight:600;">Recipe Name:  { [recipe[1] for recipe in self.recipe_list if recipe[0] == self.recipe_id][0] }</span></p></body></html>'
+        )
+        self.recipe_textbox = QLabel(self)
+
+
+        # # self.recipe_textbox.setText("Sushi")
+        # self.recipe_textbox.setText([recipe[1] for recipe in self.recipe_list if recipe[0] == self.recipe_id][0])
+        # self.recipe_textbox.setReadOnly(True)
         self.write_history_label = QLabel('Write History Note:')
         self.write_history_textbox = QTextEdit(self)
         self.write_history_textbox.setReadOnly(False)
@@ -155,7 +166,9 @@ class App(QWidget):
         button_layout.addWidget(self.back_button)
 
         self.layout.addLayout(button_layout)
+        
         self.setLayout(self.layout)
+
         self.show()  
 
     def add_clicked(self):
@@ -182,8 +195,15 @@ class App(QWidget):
             self.history_table.removeRow(current_row)
             QMessageBox.about(self, "Success", "Note deleted successfully!")
 
+    def clear_history_table(self):
+        """Clear the history table"""
+        self.history_table.setRowCount(0)
+
+    
     def back_clicked(self):
+        """Go back to the previous page"""
         print("Go back to recipe page")
+        self.clear_history_table()
         self.close()
 
     def view_history(self):
