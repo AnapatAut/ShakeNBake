@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QTableWidget
 from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QAbstractItemView
+from PyQt5.QtWidgets import QTableView
 from PyQt5.QtCore import QRect, Qt
 from PyQt5.QtGui import QFont
 import db_manager as db
@@ -43,11 +44,13 @@ class MainWindow(QMainWindow):
         self.centralwidget.setObjectName("centralwidget")
         self.setCentralWidget(self.centralwidget)
 
-        # The edit button
+        # The remove button
         self.remove_btn = QPushButton(self.centralwidget)
         self.remove_btn.setObjectName("remove_tn")
         self.remove_btn.setGeometry(QRect(820, 620, 80, 30))
         self.remove_btn.setText("Remove")
+        self.remove_btn.clicked.connect(self.delete_recipe)
+        
 
 
         # The remove button
@@ -104,6 +107,7 @@ class MainWindow(QMainWindow):
         self.step_table.verticalHeader().setVisible(False)
         self.step_table.setColumnWidth(1, colum_wid)
         self.step_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.step_table.setSelectionBehavior(QTableView.SelectRows)
 
 
     def init_tables(self):
@@ -184,6 +188,11 @@ class MainWindow(QMainWindow):
             self.ingredient_table.setItem(row, 2, ingredient_amount)
             ingredient_unit = QTableWidgetItem(f"{self.ingredient_data[row][3]}")
             self.ingredient_table.setItem(row, 3, ingredient_unit)
+
+    def delete_recipe(self):
+        conn = db.create_connection()
+        db.db_remove_all(conn,self.recipe_id)
+
 
     def clear_all_data(self):
         """
