@@ -146,11 +146,10 @@ def db_remove_all(conn, recipe_id):
         return -1
     return rec
 
-def db_remove(conn, table, recipe_id):
+def db_remove_history_notes(conn, history_id):
     """
-    Remove contents of givcn ID form the database in a given table
+    Remove contents of givcn ID form the history notes table
     :param conn: Connection to the database
-    :param table: Name of table to remove from
     :param recipe_id: ID of content to remove
     :return:
     """
@@ -158,8 +157,8 @@ def db_remove(conn, table, recipe_id):
     try:
         cur = conn.cursor()
 
-        sql_query = "DELETE FROM " + table + " WHERE recipe_id = ?"
-        cur.execute(sql_query, recipe_id)
+        sql_query = "DELETE FROM history_note  WHERE history_id = ?"
+        cur.execute(sql_query, history_id)
 
     except Error as e:
         print(e)
