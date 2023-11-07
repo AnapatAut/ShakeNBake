@@ -126,7 +126,7 @@ def query_max_id(conn, table):
         print(e)
     return max_id
 
-def db_remove(conn, recipe_id):
+def db_remove_all(conn, recipe_id):
     """
     Remove contents of givcn ID form the database
     :param conn: Connection to the database
@@ -140,6 +140,26 @@ def db_remove(conn, recipe_id):
         for table in table_dict.keys():
             sql_query = "DELETE FROM " + table + " WHERE recipe_id = ?"
             cur.execute(sql_query, recipe_id)
+
+    except Error as e:
+        print(e)
+        return -1
+    return rec
+
+def db_remove(conn, table, recipe_id):
+    """
+    Remove contents of givcn ID form the database in a given table
+    :param conn: Connection to the database
+    :param table: Name of table to remove from
+    :param recipe_id: ID of content to remove
+    :return:
+    """
+    rec = 1
+    try:
+        cur = conn.cursor()
+
+        sql_query = "DELETE FROM " + table + " WHERE recipe_id = ?"
+        cur.execute(sql_query, recipe_id)
 
     except Error as e:
         print(e)
