@@ -189,6 +189,7 @@ class Ui_MainWindow(QMainWindow):
         self.cancel_btn.setGeometry(QRect(400, 610, 151, 41))
         self.cancel_btn.setText("Cancel")
 
+        self.suggestion_list.raise_()
     def format_text(self, in_string, line_length):
         """
         Takes in an input string, the string is then segmented and cleared of any invalid symbols
