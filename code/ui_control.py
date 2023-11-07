@@ -71,7 +71,8 @@ class ui_control(QMainWindow):
         self.stacked_widget.setCurrentIndex(2)
 
     def to_history_notes(self):
-        # self.history_note_page.
+        self.history_note_page.recipe_id = self.main_menu_page.recipe_id
+        self.history_note_page.view_history()
         self.stacked_widget.setCurrentIndex(3)
 
 
