@@ -195,8 +195,15 @@ class App(QWidget):
             self.history_table.removeRow(current_row)
             QMessageBox.about(self, "Success", "Note deleted successfully!")
 
+    def clear_history_table(self):
+        """Clear the history table"""
+        self.history_table.setRowCount(0)
+
+    
     def back_clicked(self):
+        """Go back to the previous page"""
         print("Go back to recipe page")
+        self.clear_history_table()
         self.close()
 
     def view_history(self):
