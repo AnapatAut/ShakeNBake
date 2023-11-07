@@ -41,6 +41,7 @@ class ui_control(QMainWindow):
         self.main_menu_page.recipe_list_widget.itemClicked.connect(self.to_recipe_display)
         self.recipe_creation_page.confirm_btn.clicked.connect(self.recipe_creation_confirm)
         self.recipe_creation_page.cancel_btn.clicked.connect(self.to_main_menu)
+        self.recipe_display_page.remove_btn.clicked.connect(self.to_main_menu)
         self.recipe_display_page.add_note_btn.clicked.connect(self.to_history_notes)
         self.history_note_page.back_button.clicked.connect(self.to_recipe_display)
         self.recipe_display_page.back_btn.clicked.connect(self.to_main_menu)
