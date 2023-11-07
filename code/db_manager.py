@@ -125,3 +125,23 @@ def query_max_id(conn, table):
     except Error as e:
         print(e)
     return max_id
+
+def db_remove(conn, recipe_id):
+    """
+    Remove contents of givcn ID form the database
+    :param conn: Connection to the database
+    :param recipe_id: ID of content to remove
+    :return:
+    """
+    rec = 1
+    try:
+        cur = conn.cursor()
+
+        for table in table_dict.keys():
+            sql_query = "DELETE FROM " + table + " WHERE recipe_id = ?"
+            cur.execute(sql_query, recipe_id)
+
+    except Error as e:
+        print(e)
+        return -1
+    return rec
