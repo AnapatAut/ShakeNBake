@@ -21,6 +21,9 @@
 #Modified to directly alert to 'add note' when clicking add button without data
 #Modified to improve size of history note table
 
+#Modified by Shine on 7 Nov 2023
+#Modified to do the connection with db_manager
+
 
 
 import sys
@@ -42,83 +45,29 @@ from PyQt5.QtWidgets import QSizePolicy
 from PyQt5.QtWidgets import QHeaderView
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QRect, Qt
+import db_manager as db
 
-# Backend code starts here
-conn = sqlite3.connect('cookbook.db')
-cursor = conn.cursor()
 
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS history_notes (
-        recipe_name TEXT,
-        timestamp DATETIME,
-        note TEXT
-    )
-''')
-
-conn.commit()
-conn.close()
-
-def add_history_note(recipe_name, note):
-    """Add history note"""
-    conn = sqlite3.connect('cookbook.db')
-    cursor = conn.cursor()
-
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-
-    cursor.execute('''
-        INSERT INTO history_notes (recipe_name, timestamp, note)
-        VALUES (?, ?, ?)
-    ''', (recipe_name, timestamp, note))
-
-    conn.commit()
-    conn.close()
-
-def view_history_notes(recipe_name):
-    """View history note"""
-
-    conn = sqlite3.connect('cookbook.db')
-    cursor = conn.cursor()
-
-    cursor.execute('''
-        SELECT timestamp, note FROM history_notes WHERE recipe_name = ?
-    ''', (recipe_name,))
-
-    notes = cursor.fetchall()
-
-    conn.close()
-
-    return notes
-
-def delete_history_notes(recipe_name, timestamp, note):
-    """Delete history note"""
-
-    conn = sqlite3.connect('cookbook.db')
-    cursor = conn.cursor()
-
-    cursor.execute('''
-        DELETE FROM history_notes WHERE recipe_name = ? AND timestamp = ? AND note = ?
-    ''', (recipe_name, timestamp, note))
-
-    conn.commit()
-    conn.close()
 
 class App(QWidget):
     """History note window"""
     def __init__(self):
         super().__init__()
         self.title = 'Recipe History Notes'
-        self.recipe_id = 2
-        self.recipe_list = [(1, 'Kosher salt'), (2, 'Fine salt'), (3, 'Black peppercorns'), (4, 'Extra virgin olive oil')]
+        self.recipe_id = 1
+        # self.recipe_list = [(1,'Sushi'),(2,'Fine')]
         self.init_ui()
-
+        
     def init_ui(self):
         """Set up the UI page"""
         
         self.setWindowTitle(self.title)
         self.setGeometry(100, 100, 920, 680)
+        conn = db.create_connection()
 
+        name=db.db_query(conn, "main", "recipe_id", self.recipe_id)
         self.recipe_label = QLabel(
-        f'<html><head/><body><p><span style=" font-size:20pt; font-weight:600;">Recipe Name:  { [recipe[1] for recipe in self.recipe_list if recipe[0] == self.recipe_id][0] }</span></p></body></html>'
+        f'<html><head/><body><p><span style=" font-size:20pt; font-weight:600;">Recipe Name:  { name[0][1] }</span></p></body></html>'
         )
         self.recipe_textbox = QLabel(self)
 
@@ -170,30 +119,42 @@ class App(QWidget):
         self.setLayout(self.layout)
 
         self.show()  
-
+    
     def add_clicked(self):
         """Add button to add history note"""
-        recipe_name = self.recipe_textbox.text()
-        note = self.write_history_textbox.toPlainText()
-        if note.strip():  # Check if the note is not empty or contains only whitespace
-            if len(note) <= 248:
-                add_history_note(recipe_name, note)
+        # recipe_name = self.recipe_textbox.text()
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        note_details = self.write_history_textbox.toPlainText()
+
+        if note_details.strip():  # Check if the note is not empty or contains only whitespace
+            if len(note_details) <= 248:
+                conn = db.create_connection()
+                table = "history_note"
+                curr_id = db.query_max_id(conn, table) + 1
+                data_to_insert = [curr_id, self.recipe_id, note_details, timestamp]
+                db.create_task(conn, data_to_insert, table)
                 QMessageBox.about(self, "Success", "Note added successfully!")
                 self.view_history()
             else:
-                QMessageBox.about(self, "Error", "The number of characters is larger than the maximum limit 248. Please input again.")
+                QMessageBox.about(
+                    self,
+                    "Error",
+                    "The number of characters is larger than the maximum limit 248. Please input again.",
+                )
         else:
             QMessageBox.about(self, "Error", "Note can't be blank. Please input some text.")
+
+
     def delete_clicked(self):
         """Delete button to delete history note"""
         current_row = self.history_table.currentRow()
         if current_row >= 0:
-            recipe_name = self.recipe_textbox.text()
-            timestamp = self.history_table.item(current_row, 0).text()
-            note = self.history_table.item(current_row, 1).text()
-            delete_history_notes(recipe_name, timestamp, note)
+            history_id = self.history_table.item(current_row, 0).text()
+            conn = db.create_connection()
+            db.db_remove_history_notes(conn, history_id,self.recipe_id)
             self.history_table.removeRow(current_row)
             QMessageBox.about(self, "Success", "Note deleted successfully!")
+
 
     def clear_history_table(self):
         """Clear the history table"""
@@ -208,19 +169,21 @@ class App(QWidget):
 
     def view_history(self):
         """View history note"""
-        recipe_name = self.recipe_textbox.text()
-        notes = view_history_notes(recipe_name)
+        recipe_id = 1
+        conn = db.create_connection()
+        notes=db.db_query(conn, "history_note", "recipe_id", recipe_id)
+
         self.history_table.setRowCount(0)  # Clear the table before populating new data
 
         if not notes:
             QMessageBox.about(self, "Info", "No history notes found for this recipe.")
         else:
-            for row, (timestamp, note) in enumerate(notes):
+            for row, (history_id, _, timestamp, note) in enumerate(notes):
                 self.history_table.insertRow(row)
-                self.history_table.setItem(row, 0, QTableWidgetItem(timestamp))
-                self.history_table.setItem(row, 1, QTableWidgetItem(note))
-        self.history_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
+                self.history_table.setItem(row, 0, QTableWidgetItem(str(note)))
+                self.history_table.setItem(row, 1, QTableWidgetItem(timestamp))
+                # self.history_table.setItem(row, 2, QTableWidgetItem(note))
+        self.history_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)                
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
