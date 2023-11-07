@@ -139,9 +139,10 @@ def db_remove_all(conn, recipe_id):
 
         for table in table_dict.keys():
             if table is not "ingredient_list":
-                sql_query = "DELETE FROM " + table + " WHERE recipe_id = " + str(recipe_id)
-                cur.execute(sql_query)
-                conn.commit()
+                sql_query = "DELETE FROM " + table + " WHERE recipe_id = ?"
+                cur.execute(sql_query, (recipe_id,))
+
+        conn.commit()
 
     except Error as e:
         print(e)
@@ -159,8 +160,8 @@ def db_remove_history_notes(conn, history_id):
     try:
         cur = conn.cursor()
 
-        sql_query = "DELETE FROM history_note  WHERE history_id = " + str(history_id)
-        cur.execute(sql_query)
+        sql_query = "DELETE FROM history_note  WHERE history_id = ?"
+        cur.execute(sql_query, (history_id,))
 
     except Error as e:
         print(e)
