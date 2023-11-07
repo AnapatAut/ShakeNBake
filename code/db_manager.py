@@ -138,8 +138,8 @@ def db_remove_all(conn, recipe_id):
         cur = conn.cursor()
 
         for table in table_dict.keys():
-            sql_query = "DELETE FROM " + table + " WHERE recipe_id = ?"
-            cur.execute(sql_query, recipe_id)
+            sql_query = "DELETE FROM " + table + " WHERE recipe_id = " + recipe_id
+            cur.execute(sql_query)
 
     except Error as e:
         print(e)
@@ -157,8 +157,8 @@ def db_remove_history_notes(conn, history_id):
     try:
         cur = conn.cursor()
 
-        sql_query = "DELETE FROM history_note  WHERE history_id = ?"
-        cur.execute(sql_query, history_id)
+        sql_query = "DELETE FROM history_note  WHERE history_id = " + history_id
+        cur.execute(sql_query)
 
     except Error as e:
         print(e)
