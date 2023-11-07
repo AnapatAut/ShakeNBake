@@ -149,7 +149,7 @@ def db_remove_all(conn, recipe_id):
         return -1
     return rec
 
-def db_remove_history_notes(conn, history_id):
+def db_remove_history_notes(conn, history_id, recipe_id):
     """
     Remove contents of givcn ID form the history notes table
     :param conn: Connection to the database
@@ -160,9 +160,9 @@ def db_remove_history_notes(conn, history_id):
     try:
         cur = conn.cursor()
 
-        sql_query = "DELETE FROM history_note  WHERE history_id = ?"
-        cur.execute(sql_query, (history_id,))
-
+        sql_query = "DELETE FROM history_note  WHERE history_id = ? AND recipe_id = ?"
+        cur.execute(sql_query, (history_id,), (recipe_id,))
+        conn.commit()
     except Error as e:
         print(e)
         return -1
