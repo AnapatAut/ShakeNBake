@@ -80,7 +80,6 @@ class ui_main_window(QMainWindow):
         self.search_toggle_widget.clicked.connect(self.toggle_search)
 
         self.recipe_list_widget.itemClicked.connect(self.view_recipe)
-        self.ingredient_list_widget.itemClicked.connect(self.view_recipe)
 
         self.update_recipe_list()
 

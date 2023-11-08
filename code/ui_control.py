@@ -41,7 +41,6 @@ class ui_control(QMainWindow):
 
         self.main_menu_page.add_recipe_widget.clicked.connect(self.to_recipe_creation)
         self.main_menu_page.recipe_list_widget.itemClicked.connect(self.to_recipe_display)
-        self.main_menu_page.ingredient_list_widget.itemClicked.connect(self.to_recipe_display)
         self.recipe_creation_page.confirm_btn.clicked.connect(self.recipe_creation_confirm)
         self.recipe_creation_page.cancel_btn.clicked.connect(self.to_main_menu)
         self.recipe_display_page.remove_btn.clicked.connect(self.to_main_menu)
