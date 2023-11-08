@@ -26,9 +26,7 @@
 
 
 import sys
-import sqlite3
 import datetime
-
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QLabel
@@ -54,7 +52,6 @@ class App(QWidget):
         super().__init__()
         self.title = 'Recipe History Notes'
         self.recipe_id = 1
-        # self.recipe_list = [(1,'Sushi'),(2,'Fine')]
         self.init_ui()
 
     def init_ui(self):
@@ -68,10 +65,6 @@ class App(QWidget):
             f'<html><head/><body><p><span style=" font-size:20pt; font-weight:600;">Recipe Name:  {name[0][1]}</span></p></body></html>'
         )
         self.recipe_textbox = QLabel(self)
-
-        # # self.recipe_textbox.setText("Sushi")
-        # self.recipe_textbox.setText([recipe[1] for recipe in self.recipe_list if recipe[0] == self.recipe_id][0])
-        # self.recipe_textbox.setReadOnly(True)
         self.write_history_label = QLabel('Write History Note:')
         self.write_history_textbox = QTextEdit(self)
         self.write_history_textbox.setReadOnly(False)
@@ -90,9 +83,6 @@ class App(QWidget):
 
         self.delete_button = QPushButton('Delete', self)
         self.delete_button.clicked.connect(self.delete_clicked)
-
-        # self.view_button = QPushButton('View', self)
-        # self.view_button.clicked.connect(self.view_clicked)
 
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.recipe_label)
@@ -119,7 +109,6 @@ class App(QWidget):
 
     def add_clicked(self):
         """Add button to add history note"""
-        # recipe_name = self.recipe_textbox.text()
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
         note_details = self.write_history_textbox.toPlainText()
 
@@ -164,6 +153,8 @@ class App(QWidget):
         self.close()
 
     def view_history(self):
+        """View history note in the table"""
+
         conn = db.create_connection()
         name = db.db_query(conn, "main", "recipe_id", self.recipe_id)
         print(name, end="--------\n")
@@ -178,7 +169,6 @@ class App(QWidget):
                 self.history_table.insertRow(row)
                 self.history_table.setItem(row, 0, QTableWidgetItem(str(note)))
                 self.history_table.setItem(row, 1, QTableWidgetItem(timestamp))
-                # self.history_table.setItem(row, 2, QTableWidgetItem(note))
         self.history_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
 
