@@ -19,7 +19,7 @@ class ui_control(QMainWindow):
     def __init__(self):
         super().__init__()
         if db.create_connection() is None:
-            exit()
+            sys.exit()
         self.setWindowTitle("Multi-Page App")
         self.setGeometry(0, 0, 920, 680)
 

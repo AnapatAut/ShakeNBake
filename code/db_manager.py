@@ -129,7 +129,7 @@ def query_max_id(conn, table):
 
 def db_remove_all(conn, recipe_id):
     """
-    Remove contents of givcn ID form the database
+    Remove contents of given ID form the database
     :param conn: Connection to the database
     :param recipe_id: ID of content to remove
     :return:
