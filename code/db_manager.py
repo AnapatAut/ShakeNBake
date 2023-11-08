@@ -30,10 +30,11 @@ def create_connection():
     """
 
     conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-    except Error as e:
-        print(e)
+    if os.path.isfile(db_file):
+        try:
+            conn = sqlite3.connect(db_file)
+        except Error as e:
+            print(e)
     return conn
 
 

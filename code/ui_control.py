@@ -12,12 +12,14 @@ import main_menu
 import recipe_creation
 import recipe_display
 import history_note
+import db_manager as db
 
 
 class ui_control(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        if db.create_connection() is None:
+            exit()
         self.setWindowTitle("Multi-Page App")
         self.setGeometry(0, 0, 920, 680)
 
