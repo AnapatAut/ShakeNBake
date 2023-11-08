@@ -139,7 +139,7 @@ def db_remove_all(conn, recipe_id):
         cur = conn.cursor()
 
         for table in table_dict.keys():
-            if table is not "ingredient_list":
+            if table != "ingredient_list":
                 sql_query = "DELETE FROM " + table + " WHERE recipe_id = ?"
                 cur.execute(sql_query, (recipe_id,))
 
