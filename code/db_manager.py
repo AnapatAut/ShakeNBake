@@ -14,7 +14,7 @@ table_dict = {
     "ingredient_list": ["id, name", "?, ?"],
     "recipe_ingredients": ["recipe_id, name, amount, measurement", "?, ?, ?, ?"],
     "recipe_steps": ["recipe_id, step_number, step_instruction", "?, ?, ?"],
-    "history_note": ["history_id", "recipe_id", "note_details", "timestamp", "?, ?, ?, ?"]
+    "history_note": ["history_id, recipe_id, note_details, timestamp", "?, ?, ?, ?"]
 }
 
 current_dir = os.path.dirname(__file__)
