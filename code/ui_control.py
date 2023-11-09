@@ -7,7 +7,7 @@
 """
 
 import sys
-from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QStackedWidget, QApplication
+from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QMessageBox, QStackedWidget, QApplication
 import main_menu
 import recipe_creation
 import recipe_display
@@ -19,7 +19,11 @@ class ui_control(QMainWindow):
     def __init__(self):
         super().__init__()
         if db.create_connection() is None:
-            sys.exit()
+            while True:
+                error_menu = QMessageBox()
+                error_menu.setWindowTitle("Error")
+                error_menu.setText("No database found")
+                sys.exit(error_menu.exec_())
         self.setWindowTitle("Interactive Cookbook")
         self.setGeometry(0, 0, 920, 680)
 
