@@ -19,11 +19,10 @@ class ui_control(QMainWindow):
     def __init__(self):
         super().__init__()
         if db.create_connection() is None:
-            while True:
-                error_menu = QMessageBox()
-                error_menu.setWindowTitle("Error")
-                error_menu.setText("No database found")
-                sys.exit(error_menu.exec_())
+            error_menu = QMessageBox()
+            error_menu.setWindowTitle("Error")
+            error_menu.setText("No database found")
+            sys.exit(error_menu.exec_())
         self.setWindowTitle("Interactive Cookbook")
         self.setGeometry(0, 0, 920, 680)
 
