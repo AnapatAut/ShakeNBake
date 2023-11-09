@@ -18,8 +18,8 @@ import db_manager as db
 class ui_control(QMainWindow):
     def __init__(self):
         super().__init__()
-        # if db.create_connection() is None:
-        #     sys.exit()
+        if db.create_connection() is None:
+            sys.exit()
         self.setWindowTitle("Multi-Page App")
         self.setGeometry(0, 0, 920, 680)
 
