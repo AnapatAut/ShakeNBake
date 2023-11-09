@@ -20,12 +20,11 @@ class ui_control(QMainWindow):
         super().__init__()
         if db.create_connection() is None:
             sys.exit()
-        self.setWindowTitle("Multi-Page App")
+        self.setWindowTitle("Interactive Cookbook")
         self.setGeometry(0, 0, 920, 680)
 
         self.stacked_widget = QStackedWidget(self)
 
-        # Create instances of Page1 and Page2 and add them to the stacked widget
         self.main_menu_page = main_menu.ui_main_window()
         self.recipe_creation_page = recipe_creation.Ui_MainWindow()
         self.recipe_display_page = recipe_display.MainWindow()

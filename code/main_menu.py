@@ -178,16 +178,19 @@ class ui_main_window(QMainWindow):
                 search = input
             else:
                 search = search + ", " + input
-        self.ingredient_search_indicator.setText("Searching for ingredients: " + search)
         print(str_input, end=" [i] main_menu.py->def update_ingredient_list->str_input\n")
+
 
         for recipe_id in self.full_ingredient_list:
             found = 0
             for input in str_input:
                 if input in self.full_ingredient_list[recipe_id]:
                     found += 1
+
             if found == len(str_input):
                 self.add_display_list(recipe_id)
+                self.ingredient_search_indicator.setText("Searching for ingredients: " + search)
+                break
             else:
                 self.ingredient_search_indicator.setText("Recipe with inserted ingredients does not exist")
 
@@ -212,6 +215,7 @@ class ui_main_window(QMainWindow):
         query = db.db_query(conn, "main", "name", item.text())
         self.recipe_id = query[0][0]
         print("Go to View Recipe Menu for: " + item.text() + "; ID: " + str(self.recipe_id))
+        self.ingredient_search_indicator.clear()
 
 
 def main():
