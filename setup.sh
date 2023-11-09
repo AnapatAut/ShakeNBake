@@ -7,7 +7,6 @@ pyinstaller --collect-all code/ui_control.py --add-data "data/recipe_database.db
 cd dist
 mv ui_control/_internal/data/ ui_control/
 cd ui_control/data/
-ls
 mv recipe_database.db3/ ..
 cd ..
 mv recipe_database.db3/recipe_database.db3 data/
