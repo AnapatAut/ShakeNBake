@@ -51,7 +51,6 @@ class Ui_MainWindow(QMainWindow):
         self.recipe_name_error.setGeometry(QRect(725, 15, 175, 71))
         self.recipe_name_error.setFont(error_font)
         self.recipe_name_error.setStyleSheet("color: red;")
-        self.recipe_name_error.hide()
 
         self.recipe_name_in = QTextEdit(self.centralwidget)
         self.recipe_name_in.setObjectName("recipe_name_in")
@@ -69,7 +68,6 @@ class Ui_MainWindow(QMainWindow):
         self.ingredient_error.setGeometry(QRect(725, 64, 175, 71))
         self.ingredient_error.setFont(error_font)
         self.ingredient_error.setStyleSheet("color: red;")
-        self.ingredient_error.hide()
 
 
         self.ingredient_name_in = QTextEdit(self.centralwidget)
@@ -153,11 +151,11 @@ class Ui_MainWindow(QMainWindow):
         self.step_error.setGeometry(QRect(725, 275, 175, 71))
         self.step_error.setFont(error_font)
         self.step_error.setStyleSheet("color: red;")
-        self.step_error.hide()
 
         self.step_in = QTextEdit(self.centralwidget)
         self.step_in.setObjectName("step_in")
         self.step_in.setGeometry(QRect(180, 290, 371, 81))
+        self.step_in.textChanged.connect(self.step_status_revert)
         self.step_in.setPlaceholderText("Enter Your Receipe Steps Here One by One")
 
         self.step_list = QListWidget(self.centralwidget)
@@ -333,7 +331,15 @@ class Ui_MainWindow(QMainWindow):
         Adding the string from step_in to the step_list
         :return:
         """
+        in_text = self.step_in.toPlainText()
+
+        if len(in_text) > 400:
+            self.step_status = 5
+            self.step_error.setText("Too many characters")
+            return
+
         formatted_text = self.format_text(self.step_in.toPlainText(), 60)
+        formatted_text = self.format_text(in_text, 60)
         if formatted_text:
             self.step_list.addItem(formatted_text)
             self.step_in.clear()
@@ -347,6 +353,9 @@ class Ui_MainWindow(QMainWindow):
         for item in selected_items:
             self.step_list.takeItem(self.step_list.row(item))
 
+    def step_status_revert(self):
+        self.step_status = 0
+        self.step_error.setText("")
     def validate_and_add_new_recipe(self):
         """
         Validating the name, ingredients, and steps field, then adding the information
@@ -361,10 +370,6 @@ class Ui_MainWindow(QMainWindow):
         self.recipe_name_error.setText(error_status[self.name_status])
         self.ingredient_error.setText(error_status[self.ingredient_status])
         self.step_error.setText(error_status[self.step_status])
-
-        self.recipe_name_error.show()
-        self.ingredient_error.show()
-        self.step_error.show()
 
         self.all_status = 1
         if self.name_status == 0 and self.ingredient_status == 0 and self.step_status == 0:
