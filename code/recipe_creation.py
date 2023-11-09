@@ -333,12 +333,11 @@ class Ui_MainWindow(QMainWindow):
         """
         in_text = self.step_in.toPlainText()
 
-        if len(in_text) > 400:
+        if len(in_text) > 128:
             self.step_status = 5
             self.step_error.setText("Too many characters")
             return
 
-        formatted_text = self.format_text(self.step_in.toPlainText(), 60)
         formatted_text = self.format_text(in_text, 60)
         if formatted_text:
             self.step_list.addItem(formatted_text)
