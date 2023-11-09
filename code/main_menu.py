@@ -190,7 +190,6 @@ class ui_main_window(QMainWindow):
             if found == len(str_input):
                 self.add_display_list(recipe_id)
                 self.ingredient_search_indicator.setText("Searching for ingredients: " + search)
-                break
             else:
                 self.ingredient_search_indicator.setText("Recipe with inserted ingredients does not exist")
 
