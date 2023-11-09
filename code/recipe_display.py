@@ -101,7 +101,7 @@ class MainWindow(QMainWindow):
         self.step_table = QTableWidget(self.centralwidget)
         self.step_table.setGeometry(QRect(35, 370, self.table_width, 261))
         self.step_table.setColumnCount(2)
-        self.step_table.setHorizontalHeaderLabels(["Steps:", "Column 2"])
+        self.step_table.setHorizontalHeaderLabels(["Steps number:", "Steps descriptions"])
         self.step_table.setColumnWidth(0,100)
         self.step_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.step_table.verticalHeader().setVisible(False)
